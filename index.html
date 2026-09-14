@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>奇幻造物实现蓝图 · Blueprint of Fantasy Creation</title>
+  <meta name="description" content="以第一性原理与超级工程师的工作方法，清点奇幻作品中的魔法、异兽与超自然造物：哪些已成现实，哪些仍在炼金术里沉睡，哪些只属于纸上的世界。">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#/">
+        <span class="brand-mark">幻</span>
+        <span class="brand-text">
+          <strong>奇幻造物实现蓝图</strong>
+          <small>BLUEPRINT OF FANTASY CREATION · ARCHIVE</small>
+        </span>
+      </a>
+      <nav class="site-nav" id="site-nav">
+        <a href="#/" data-nav="/">首页</a>
+        <a href="#/category" data-nav="/category">造物检索</a>
+        <a href="#/tree" data-nav="/tree">造物树</a>
+        <a href="#/map" data-nav="/map">进度星图</a>
+        <a href="#/audit" data-nav="/audit">开发进度</a>
+        <a href="#/sop" data-nav="/sop">研发SOP</a>
+        <a href="#/works" data-nav="/work">世界观档案</a>
+        <a href="#/relations" data-nav="/relations">关联网络</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="app" class="container"></main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>奇幻造物实现蓝图 · 卷宗 FAN-BLUEPRINT</p>
+      <p class="muted">纸上的一切，终将接受自然法则的审问。</p>
+    </div>
+  </footer>
+
+  <!-- 数据层 -->
+  <script src="js/data/levels.js"></script>
+  <script src="js/data/domains.js"></script>
+  <script src="js/data/works.js"></script>
+  <script src="js/data/techs.js"></script>
+  <script src="js/data/methods.js"></script>
+  <script src="js/data/tree-template.js"></script>
+  <script src="js/data/relations.js"></script>
+  <script src="js/data/davinci.js"></script>
+
+  <!-- 视图层 -->
+  <script src="js/views/home.js"></script>
+  <script src="js/views/category.js"></script>
+  <script src="js/views/detail.js"></script>
+  <script src="js/views/work.js"></script>
+  <script src="js/views/work-tree.js"></script>
+  <script src="js/views/works.js"></script>
+  <script src="js/views/sop.js"></script>
+  <script src="js/views/tech-tree.js"></script>
+  <script src="js/views/progress-charts.js"></script>
+  <script src="js/views/map.js"></script>
+  <script src="js/views/relations.js"></script>
+  <script src="js/views/audit.js"></script>
+
+  <!-- 路由与应用入口 -->
+  <script src="js/router.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

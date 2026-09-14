@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="100%" height="100%">
+  <g fill="none" stroke="#1a1512" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 盾形底 -->
+    <path d="M160 36 L236 60 L236 150 Q236 232 160 280 Q84 232 84 150 L84 60 Z" stroke="#6a4c93" stroke-width="1.6"/>
+    <!-- 剑身 -->
+    <path d="M160 60 L150 70 L150 214 L160 230 L170 214 L170 70 Z" fill="#f4ecd8"/>
+    <line x1="160" y1="74" x2="160" y2="214"/>
+    <!-- 血槽符文 -->
+    <path d="M160 96 l-6 8 l6 8 l6 -8 Z" stroke="#6a4c93" stroke-width="1.4" fill="none"/>
+    <path d="M160 128 l-5 7 l5 7 l5 -7 Z" stroke="#6a4c93" stroke-width="1.4" fill="none"/>
+    <!-- 护手 -->
+    <path d="M118 214 L202 214"/>
+    <path d="M118 214 q-8 0 -8 10 q0 -10 -8 -10 M202 214 q8 0 8 10 q0 -10 8 -10" stroke-width="1.8"/>
+    <!-- 柄 -->
+    <path d="M152 214 L152 250 Q160 258 168 250 L168 214"/>
+    <path d="M150 232 L170 232 M150 242 L170 242"/>
+    <!-- 柄头 -->
+    <circle cx="160" cy="258" r="9"/>
+    <path d="M160 250 l0 16 M152 258 l16 0" stroke-width="1.4"/>
+  </g>
+</svg>

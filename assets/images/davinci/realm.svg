@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="100%" height="100%">
+  <g fill="none" stroke="#1a1512" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 罗盘外圈 -->
+    <circle cx="160" cy="160" r="138"/>
+    <circle cx="160" cy="160" r="120"/>
+    <!-- 方位星 -->
+    <polygon points="160,38 174,150 160,162 146,150" fill="#1a1512" stroke="none"/>
+    <polygon points="160,282 174,170 160,158 146,170" fill="#1a1512" stroke="none"/>
+    <polygon points="38,160 150,174 162,160 150,146" fill="#1a1512" stroke="none"/>
+    <polygon points="282,160 170,174 158,160 170,146" fill="#1a1512" stroke="none"/>
+    <polygon points="160,60 168,152 160,160 152,152" stroke="#6a4c93" stroke-width="1.6"/>
+    <polygon points="160,260 168,168 160,160 152,168" stroke="#6a4c93" stroke-width="1.6"/>
+    <polygon points="60,160 152,168 160,160 152,152" stroke="#6a4c93" stroke-width="1.6"/>
+    <polygon points="260,160 168,168 160,160 168,152" stroke="#6a4c93" stroke-width="1.6"/>
+    <!-- 抽象海陆 -->
+    <path d="M100 120 q40 -20 70 10 q30 30 -10 60 q-50 20 -70 -20 q-10 -30 10 -50 Z"/>
+    <path d="M196 196 q26 -8 40 14 q10 24 -18 30 q-30 4 -34 -20 q-2 -18 12 -24 Z"/>
+    <!-- 航线虚线 -->
+    <path d="M120 130 q40 30 90 60" stroke="#6a4c93" stroke-width="1.6" stroke-dasharray="4 5"/>
+    <circle cx="120" cy="130" r="3.4" fill="#1a1512" stroke="none"/>
+    <circle cx="210" cy="190" r="3.4" fill="#1a1512" stroke="none"/>
+    <!-- 小帆船 -->
+    <path d="M205 184 l10 0 l-2 8 l-6 0 Z"/>
+    <line x1="210" y1="184" x2="210" y2="168"/>
+    <path d="M210 170 l8 10 l-8 0 Z" fill="#1a1512" stroke="none"/>
+  </g>
+</svg>

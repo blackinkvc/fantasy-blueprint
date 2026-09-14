@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="100%" height="100%">
+  <g fill="none" stroke="#1a1512" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 外圈衔尾蛇 -->
+    <circle cx="160" cy="160" r="138"/>
+    <path d="M160 22 a138 138 0 1 1 -0.1 0" stroke="#6a4c93" stroke-width="1.6"/>
+    <path d="M160 36 q14 6 8 22 q-10 -2 -8 -22 Z" fill="#1a1512" stroke="none"/>
+    <path d="M160 284 q-14 -6 -8 -22 q10 2 8 22 Z" fill="#1a1512" stroke="none"/>
+    <!-- 炼金三角 -->
+    <polygon points="160,78 245,205 75,205"/>
+    <!-- 三角内：日、月、星 -->
+    <circle cx="160" cy="120" r="16"/>
+    <path d="M152 120 a16 16 0 1 0 16 0 a12 12 0 1 1 -16 0 Z" fill="#1a1512" stroke="none"/>
+    <path d="M120 188 a14 14 0 1 0 0.1 0 a10 10 0 1 1 -0.1 0 Z" fill="#1a1512" stroke="none"/>
+    <path d="M205 178 l8 18 l20 -2 l-15 14 l9 18 l-18 -10 l-12 16 l-2 -20 l-16 -8 l17 -10 l-4 -19 Z" stroke-width="1.6"/>
+    <!-- 下方烧瓶 -->
+    <path d="M146 232 L146 250 L130 282 L190 282 L174 250 L174 232 Z"/>
+    <line x1="140" y1="240" x2="180" y2="240"/>
+    <circle cx="160" cy="266" r="6" fill="#6a4c93" stroke="none"/>
+  </g>
+</svg>
