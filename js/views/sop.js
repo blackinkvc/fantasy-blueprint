@@ -14,8 +14,8 @@ const SopView = {
     {
       id: "SOP-2", name: "原理分析", color: "#222222", methods: ["empirical", "first-principles", "gap-typology"],
       goal: "逐条核对自然法则，给技术定一个现实到幻想之间的坐标。",
-      activities: ["逐条核对自然法则", "标注违反/需突破/可实现", "对照五级分类定级(L1-L5)", "产出可行性分级报告"],
-      output: "《可行性分级报告》"
+      activities: ["逐条核对自然法则", "标注违反/需突破/可实现", "按现实/需突破/违反三态归类", "产出可行性分析报告"],
+      output: "《可行性分析报告》"
     },
     {
       id: "SOP-3", name: "理论研究与建模", color: "#1a1a1a", methods: ["energy-audit"],
@@ -89,19 +89,7 @@ const SopView = {
       </div>`;
     }).join("");
 
-    // 蓝图统计：分级
-    const levelsSorted = Object.values(LEVELS).sort((a, b) => a.order - b.order);
-    const levelStat = levelsSorted.map(lv => {
-      const count = TECHS.filter(t => t.level === lv.key).length;
-      const pct = TECHS.length ? (count / TECHS.length * 100).toFixed(1) : 0;
-      return `
-        <div class="stat-row">
-          <span class="stat-label" style="color:${lv.color}">${lv.badge}</span>
-          <div class="stat-bar"><div class="stat-fill" style="width:${pct}%;background:${lv.color}"></div></div>
-          <span class="stat-val">${count} / ${pct}%</span>
-        </div>`;
-    }).join("");
-
+    // 蓝图统计：领域
     const domainStat = Object.values(DOMAINS).map(d => {
       const count = TECHS.filter(t => t.domain === d.key).length;
       return `<div class="dom-stat" style="--dcolor:${d.color}">${d.icon} ${d.label} <strong>${count}</strong></div>`;
@@ -126,10 +114,6 @@ const SopView = {
       <section class="block">
         <h2>蓝图进度统计</h2>
         <div class="stat-grid">
-          <div class="stat-panel">
-            <h3>按实现分级</h3>
-            ${levelStat}
-          </div>
           <div class="stat-panel">
             <h3>按造物领域</h3>
             <div class="dom-stats">${domainStat}</div>

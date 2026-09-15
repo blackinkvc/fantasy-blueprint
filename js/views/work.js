@@ -1,6 +1,6 @@
 // ============================================================
 // 世界观简介页视图
-// 作品设定 + 法则偏离点 + 该世界观造物列表(按分级分组)
+// 作品设定 + 法则偏离点 + 该世界观造物列表(按领域分组)
 // ============================================================
 const WorkView = {
   render(id) {
@@ -8,36 +8,28 @@ const WorkView = {
     if (!w) return `<div class="not-found"><h1>未找到</h1><p>作品「${id}」不存在。</p><a class="btn" href="#/">返回首页</a></div>`;
 
     const techs = TECHS.filter(t => t.workId === w.id);
-    const levelsSorted = Object.values(LEVELS).sort((a, b) => a.order - b.order);
 
-    // 按分级分组的造物
-    const grouped = levelsSorted.map(lv => {
-      const items = techs.filter(t => t.level === lv.key);
+    // 按领域分组的造物
+    const grouped = Object.values(DOMAINS).map(d => {
+      const items = techs.filter(t => t.domain === d.key);
       if (!items.length) return "";
       return `
         <div class="lv-group">
-          <div class="lv-group-head" style="--lvcolor:${lv.color}">
-            <span class="lv-dot"></span> ${lv.badge} (${items.length})
+          <div class="lv-group-head" style="--lvcolor:${d.color}">
+            <span class="lv-dot"></span> ${d.icon} ${d.label} (${items.length})
           </div>
           <div class="lv-group-items">
-            ${items.map(t => {
-              const dom = DOMAINS[t.domain];
-              return `<a class="lv-item" href="#/tech/${t.id}">
+            ${items.map(t => `
+              <a class="lv-item" href="#/tech/${t.id}">
                 <strong>${t.name}</strong>
                 <span class="muted">${t.summary}</span>
-                <span class="dom-pill" style="--dcolor:${dom.color}">${dom.icon}${dom.label}</span>
-              </a>`;
-            }).join("")}
+                <span class="dom-pill" style="--dcolor:${d.color}">${d.icon}${d.label}</span>
+              </a>`).join("")}
           </div>
         </div>`;
     }).join("");
 
-    // 世界观覆盖等级范围徽章
-    const levelBadges = w.techLevels.map(l => {
-      const lv = LEVELS[l];
-      return `<span class="lv-badge" style="--lvcolor:${lv.color}">${lv.badge}</span>`;
-    }).join(" ");
-
+    // 世界观法则偏离点
     const divergences = w.physicalDivergences.map(d =>
       `<li class="div-item">${d}</li>`).join("");
 
@@ -45,7 +37,7 @@ const WorkView = {
     const repTechs = (w.representativeTechs || []).map(rt => {
       const t = TECHS.find(x => x.id === rt);
       return t
-        ? `<a class="chip-link" href="#/tech/${t.id}" style="--lvcolor:${LEVELS[t.level].color}">${t.name}</a>`
+        ? `<a class="chip-link" href="#/tech/${t.id}">${t.name}</a>`
         : `<span class="tag">${rt}</span>`;
     }).join(" ");
 
@@ -94,7 +86,6 @@ const WorkView = {
         <header class="work-head">
           <h1>《${w.title}》</h1>
           <p class="meta">${w.creator} · ${w.media}${w.year ? " · " + w.year + " 年" : ""} · ${w.era}</p>
-          <div class="level-badges">${levelBadges}</div>
         </header>
 
         <section class="work-split">
@@ -123,7 +114,7 @@ const WorkView = {
 
         <section class="block">
           <h2>造物元素表</h2>
-          <p class="muted note">普世模板 · 六大分支，自下而上由现实基线至世界观限定。<strong>实心</strong>为该文明已掌握，<strong>虚线</strong>为未点亮；节点右上角罗马数字为实现等级；双线边框与数字徽章表示挂有本作造物卷宗（可点击）；右列 ★ 为该世界观独有的奇点造物。</p>
+          <p class="muted note">普世模板 · 六大分支，自下而上由现实基线至世界观限定。<strong>实心</strong>为该文明已掌握，<strong>虚线</strong>为未点亮；双线边框与数字徽章表示挂有本作造物卷宗（可点击）；右列 ★ 为该世界观独有的奇点造物。</p>
           ${WorkTreeView.render(w.id)}
         </section>
 
@@ -160,7 +151,7 @@ function renderTechChain(workId) {
   // 收集节点：本世界观造物 + 跨作品的外部前提
   const nodeMap = {};
   ownTechs.forEach(t => {
-    nodeMap[t.id] = { id: t.id, name: t.name, level: t.level, domain: t.domain, workId: t.workId, external: false };
+    nodeMap[t.id] = { id: t.id, name: t.name, domain: t.domain, workId: t.workId, external: false };
   });
   const edges = [];
   for (const t of ownTechs) {
@@ -168,7 +159,7 @@ function renderTechChain(workId) {
       const dt = TECHS.find(x => x.id === d);
       if (!dt) continue;
       if (dt.workId !== workId) {
-        nodeMap[d] = nodeMap[d] || { id: d, name: dt.name, level: dt.level, domain: dt.domain, workId: dt.workId, external: true };
+        nodeMap[d] = nodeMap[d] || { id: d, name: dt.name, domain: dt.domain, workId: dt.workId, external: true };
       }
       edges.push({ from: d, to: t.id });
     }
@@ -226,23 +217,21 @@ function renderTechChain(workId) {
 
   // 节点
   let nodeSvg = "";
-  ids.forEach(id => {
-    const n = nodeMap[id];
-    const x = pos[id].x, y = pos[id].y;
-    const dom = DOMAINS[n.domain];
-    const lv = LEVELS[n.level];
-    const ext = n.external;
+    ids.forEach(id => {
+      const n = nodeMap[id];
+      const x = pos[id].x, y = pos[id].y;
+      const dom = DOMAINS[n.domain];
+      const ext = n.external;
     const fill = ext ? "none" : "#141414";
     const stroke = ext ? "#a09890" : "#141414";
     const txtFill = ext ? "#a09890" : "#f6f2e7";
     const fromTitle = ext ? ((WORKS.find(w => w.id === n.workId) || {}).title || n.workId) : "";
-    const title = esc(n.name + (ext ? "\n外部前提 · 来自《" + fromTitle + "》" : "\n等级 " + (lv ? lv.badge : "") + " · 点击查看卷宗"));
+    const title = esc(n.name + (ext ? "\n外部前提 · 来自《" + fromTitle + "》" : " · 点击查看卷宗"));
     let body = "";
     if (ext) body += `<rect x="${x - 3}" y="${y - 3}" width="${NODE_W + 6}" height="${NODE_H + 6}" fill="none" stroke="#a09890" stroke-width="0.8" stroke-dasharray="3,3"/>`;
     body += `<rect x="${x}" y="${y}" width="${NODE_W}" height="${NODE_H}" fill="${fill}" stroke="${stroke}" stroke-width="1.2" rx="1.5"/>
       <circle cx="${x + 13}" cy="${y + 14}" r="4" fill="${ext ? '#a09890' : dom.color}"/>
       <text x="${x + 24}" y="${y + 18}" font-size="12.5" fill="${txtFill}" letter-spacing="0.3">${esc(clip(n.name, 9))}</text>
-      ${lv ? `<text x="${x + NODE_W - 7}" y="${y + 16}" text-anchor="end" font-size="9" fill="${ext ? '#a09890' : '#bdb5a8'}">${lv.badge}</text>` : ""}
       ${ext
         ? `<text x="${x + NODE_W / 2}" y="${y + NODE_H - 9}" text-anchor="middle" font-size="8" fill="#a09890">外·《${esc(clip(fromTitle, 6))}》</text>`
         : (dom ? `<text x="${x + 13}" y="${y + NODE_H - 10}" font-size="8" fill="#bdb5a8">${esc(dom.icon)} ${esc(clip(dom.label, 4))}</text>` : "")}`;

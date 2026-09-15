@@ -13,7 +13,6 @@ function esc(s) { return escapeHtml(s); }
   Router.register("/category", (ctx) => CategoryView.render(ctx.query));
   Router.register("/tech/:id", (ctx) => DetailView.render(ctx.params.id));
   Router.register("/tree", () => TechTreeView.render(), () => TechTreeView.mount());
-  Router.register("/map", () => MapView.render(), () => MapView.mount());
   Router.register("/work/:id", (ctx) => WorkView.render(ctx.params.id));
   Router.register("/works", (ctx) => WorksView.render(ctx.query));
   Router.register("/relations", () => RelationsView.render(), () => RelationsView.mount());

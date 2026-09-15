@@ -2,8 +2,7 @@
 // 造物元素表视图（普世模板）
 // 每个世界观点亮自己已掌握的节点；未点亮为虚线轮廓。
 // 有造物卷宗挂载的节点带双线边框与条数徽章，可点击跳转。
-// 纵轴为技术阶梯（下：现实基线 → 上：世界观限定），
-// 节点右上角罗马数字为真实实现等级。
+// 纵轴为技术阶梯（下：现实基线 → 上：世界观限定）。
 // ============================================================
 const WorkTreeView = (() => {
   const COL_W = 158, NODE_W = 132, NODE_H = 50;
@@ -14,7 +13,6 @@ const WorkTreeView = (() => {
   const SIG_W = 178;
   const VB_W = SIG_X + SIG_W + 22;
   const VB_H = 648;
-  const ROMAN = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ"];
   const SIG_MAX = 7;
 
   const esc = s => String(s)
@@ -23,21 +21,30 @@ const WorkTreeView = (() => {
 
   const clip = (s, n) => s.length > n ? s.slice(0, n - 1) + "…" : s;
 
-  // 该世界观造物条目 → 模板节点 挂载表
+  // 该世界观造物条目 → 模板节点 挂载表（按领域归支，支内按 id 排序后轮转铺到各层）
   function buildMountMap(workId) {
-    const map = {};
+    const byBranch = {};
     for (const t of TECHS) {
       if (t.workId !== workId) continue;
-      const nid = treeMountTech(t);
-      if (!nid) continue;
-      (map[nid] = map[nid] || []).push(t);
+      const bKey = TREE_DOMAIN_MAP[t.domain];
+      if (!bKey) continue;
+      (byBranch[bKey] = byBranch[bKey] || []).push(t);
+    }
+    const map = {};
+    for (const bKey of Object.keys(byBranch)) {
+      const branch = TREE_BRANCHES.find(b => b.key === bKey);
+      if (!branch) continue;
+      byBranch[bKey].sort((a, b) => a.id.localeCompare(b.id));
+      byBranch[bKey].forEach((t, i) => {
+        const node = branch.nodes[i % branch.nodes.length];
+        (map[node.id] = map[node.id] || []).push(t);
+      });
     }
     return map;
   }
 
   function nodeSvg(x, y, node, lit, techs) {
     const cx = x + NODE_W / 2;
-    const roman = ROMAN[node.level - 1];
     const hasTech = techs && techs.length;
     let body = "";
 
@@ -51,16 +58,14 @@ const WorkTreeView = (() => {
       fill="${lit ? "#141414" : "none"}" stroke="${lit ? "#141414" : "#a09890"}"
       stroke-width="1.2" ${lit ? "" : 'stroke-dasharray="4,3"'} rx="1.5"/>
       <text x="${cx}" y="${y + 30}" text-anchor="middle" font-size="12"
-        fill="${lit ? "#f6f2e7" : "#a09890"}" letter-spacing="0.4">${esc(node.name)}</text>
-      <text x="${x + NODE_W - 7}" y="${y + 15}" text-anchor="end" font-size="9"
-        fill="${lit ? "#bdb5a8" : "#b8b0a4"}">${roman}</text>`;
+        fill="${lit ? "#f6f2e7" : "#a09890"}" letter-spacing="0.4">${esc(node.name)}</text>`;
 
     if (hasTech) {
       body += `<rect x="${x + 5}" y="${y + 5}" width="15" height="14" fill="#f6f2e7"/>
         <text x="${x + 12.5}" y="${y + 15.5}" text-anchor="middle" font-size="9.5"
           fill="#141414" font-weight="bold">${techs.length}</text>`;
     }
-    return { body, title: esc(node.name + " · 等级 " + roman + "\n" + node.desc +
+    return { body, title: esc(node.name + "\n" + node.desc +
       (hasTech ? "\n本作卷宗：" + techs.map(t => t.name).join("、") : "")) };
   }
 
@@ -117,7 +122,7 @@ const WorkTreeView = (() => {
     const sigs = (w.representativeTechs || []).slice(0, SIG_MAX).map(rt => {
       const t = TECHS.find(x => x.id === rt);
       return t
-        ? { name: t.name, href: "#/tech/" + t.id, roman: ROMAN[t.level - 1], tip: "等级 " + ROMAN[t.level - 1] + " · 点击查看卷宗" }
+        ? { name: t.name, href: "#/tech/" + t.id, tip: "点击查看卷宗" }
         : { name: rt, tip: "本世界观登记造物" };
     });
     // 奇点列竖线
@@ -132,9 +137,7 @@ const WorkTreeView = (() => {
       const body = `<rect x="${SIG_X}" y="${y}" width="${SIG_W}" height="${NODE_H}"
           fill="#141414" stroke="#141414" stroke-width="1.2" rx="1.5"/>
         <text x="${SIG_X + 12}" y="${y + 30}" font-size="11.5" fill="#f6f2e7"
-          letter-spacing="0.3">★ ${esc(nameClip)}</text>
-        ${sg.roman ? `<text x="${SIG_X + SIG_W - 7}" y="${y + 15}" text-anchor="end"
-          font-size="9" fill="#bdb5a8">${sg.roman}</text>` : ""}`;
+          letter-spacing="0.3">★ ${esc(nameClip)}</text>`;
       const title = esc(sg.name + "\n" + sg.tip);
       s += sg.href
         ? `<a href="${sg.href}"><title>${title}</title>${body}</a>`

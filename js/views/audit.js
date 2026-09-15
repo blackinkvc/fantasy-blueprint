@@ -57,7 +57,7 @@ const AuditView = {
       const score = this._techScore(t);
       return {
         id: t.id, name: t.name, workId: t.workId,
-        level: t.level, domain: t.domain, score,
+        domain: t.domain, score,
         band: this._band(score), diag: this._diag(t, score)
       };
     });
@@ -168,7 +168,6 @@ const AuditView = {
       <tr data-score="${r.score}">
         <td class="aw-name"><a href="#/tech/${r.id}">${esc(r.name)}</a></td>
         <td>${esc(this._workTitle(r.workId))}</td>
-        <td class="num">${r.level}</td>
         <td class="num">${r.score}</td>
         <td class="aw-diag">${r.diag.map(x => `<span class="aw-tag ${r.band}">${x}</span>`).join("")}</td>
       </tr>`).join("");
@@ -186,10 +185,9 @@ const AuditView = {
         <td class="aw-diag">${r.diag.map(x => `<span class="aw-tag ${r.band}">${x}</span>`).join("")}</td>
       </tr>`).join("");
 
-    // 按领域 / 分级拆层
+    // 按领域拆层
     const bd = this._breakdown(d);
     const domainRows = this._breakRows(bd.byDomain, k => DOMAINS[k].label);
-    const levelRows = this._breakRows(bd.byLevel, k => (LEVELS[k] ? LEVELS[k].badge : k));
 
     return `
       <section class="view audit-view">
@@ -234,18 +232,12 @@ const AuditView = {
         </section>
 
         <section class="audit-block">
-          <div class="ab-head"><h2>按领域 / 分级拆层完成度</h2></div>
+          <div class="ab-head"><h2>按领域拆层完成度</h2></div>
           <div class="audit-grid2" style="margin-bottom:0">
             <figure class="audit-fig">
               <figcaption>按领域</figcaption>
               <div class="audit-table-wrap" style="max-height:none;border:none;overflow:visible">
                 <table class="audit-table"><thead><tr><th>领域</th><th>技术数</th><th>平均质量</th><th>优劣构成</th></tr></thead><tbody>${domainRows}</tbody></table>
-              </div>
-            </figure>
-            <figure class="audit-fig">
-              <figcaption>按实现分级</figcaption>
-              <div class="audit-table-wrap" style="max-height:none;border:none;overflow:visible">
-                <table class="audit-table"><thead><tr><th>分级</th><th>技术数</th><th>平均质量</th><th>优劣构成</th></tr></thead><tbody>${levelRows}</tbody></table>
               </div>
             </figure>
           </div>
@@ -283,7 +275,7 @@ const AuditView = {
           </div>
           <div class="audit-table-wrap">
             <table class="audit-table" id="audit-tech-table">
-              <thead><tr><th>技术</th><th>所属世界观</th><th>分级</th><th>完整度</th><th>自检诊断</th></tr></thead>
+              <thead><tr><th>技术</th><th>所属世界观</th><th>完整度</th><th>自检诊断</th></tr></thead>
               <tbody>${techRowsHtml}</tbody>
             </table>
           </div>
@@ -312,17 +304,14 @@ const AuditView = {
     return d.techRows.filter(r => r.score < 75).sort((a, b) => a.score - b.score);
   },
 
-  // 按领域 / 分级拆层统计
+  // 按领域拆层统计
   _breakdown(d) {
     const byDomain = {};
     Object.keys(DOMAINS).forEach(k => byDomain[k] = { total: 0, sum: 0, b: { excellent: 0, good: 0, weak: 0 } });
-    const byLevel = {};
-    Object.values(LEVELS).sort((a, b) => a.order - b.order).forEach(l => byLevel[l.key] = { total: 0, sum: 0, b: { excellent: 0, good: 0, weak: 0 } });
     d.techRows.forEach(r => {
       const dm = byDomain[r.domain]; if (dm) { dm.total++; dm.sum += r.score; dm.b[r.band]++; }
-      const lv = byLevel[r.level]; if (lv) { lv.total++; lv.sum += r.score; lv.b[r.band]++; }
     });
-    return { byDomain, byLevel };
+    return { byDomain };
   },
 
   _breakRows(map, nameOf) {

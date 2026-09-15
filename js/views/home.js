@@ -3,20 +3,6 @@
 // ============================================================
 const HomeView = {
   render() {
-    const levelsSorted = Object.values(LEVELS).sort((a, b) => a.order - b.order);
-    const levelCards = levelsSorted.map(lv => {
-      const count = TECHS.filter(t => t.level === lv.key).length;
-      return `
-        <a class="level-card" href="#/category?level=${lv.key}" style="--lvcolor:${lv.color}">
-          <div class="level-card-head">
-            <span class="level-key">${lv.key}</span>
-            <span class="level-count">${count} 项</span>
-          </div>
-          <h3>${lv.label}</h3>
-          <p>${lv.desc}</p>
-        </a>`;
-    }).join("");
-
     // 首页展示有深度条目的核心卷宗；其余收入总库
     const deepWorks = WORKS.filter(w => TECHS.some(t => t.workId === w.id));
     const workCards = deepWorks.map(w => {
@@ -57,15 +43,7 @@ const HomeView = {
           有的，永远只属于写下它的那个世界。
         </p>
         <div class="hero-rule"></div>
-        <p class="hero-stats-line">条目 ${TECHS.length} · 世界观 ${WORKS.length} · 领域 ${Object.keys(DOMAINS).length} · 分级 ${Object.keys(LEVELS).length}</p>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <h2>实现难度分级</h2>
-          <a class="more" href="#/category">查看全部 →</a>
-        </div>
-        <div class="level-grid">${levelCards}</div>
+        <p class="hero-stats-line">条目 ${TECHS.length} · 世界观 ${WORKS.length} · 领域 ${Object.keys(DOMAINS).length}</p>
       </section>
 
       <section class="section">

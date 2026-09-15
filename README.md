@@ -11,7 +11,6 @@
 - **首页** —— 项目总览与方法论
 - **造物检索** —— 按分类浏览奇幻造物
 - **造物树** —— 技术/造物树状结构
-- **进度星图** —— 实现进度可视化
 - **开发进度** —— 审计与里程碑
 - **研发 SOP** —— 研究与实现流程
 - **世界观档案** —— 作品与世界观资料
@@ -22,7 +21,7 @@
 ```
 index.html              入口页面
 css/styles.css          样式
-js/data/                数据层（levels / domains / works / techs / methods / relations / davinci）
+js/data/                数据层（domains / works / techs / methods / relations / davinci / tree-template）
 js/views/               视图层（各页面渲染逻辑）
 js/router.js            哈希路由
 js/app.js               应用入口

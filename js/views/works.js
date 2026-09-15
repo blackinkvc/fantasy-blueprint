@@ -47,9 +47,6 @@ const WorksView = {
     // 登记卡
     const cards = list.map((w, i) => {
       const techCount = TECHS.filter(t => t.workId === w.id).length;
-      const levels = (w.techLevels || []).map(l => LEVELS[l]).filter(Boolean);
-      const lvBadges = levels.map(lv =>
-        `<span class="wl-badge" style="--lvcolor:${lv.color}">${lv.badge}</span>`).join("");
       return `
       <a class="work-entry" href="#/work/${w.id}">
         <div class="we-top">
@@ -60,7 +57,6 @@ const WorksView = {
         <p class="we-creator">${w.creator} · ${w.media}</p>
         <p class="we-setting">${w.setting}</p>
         <div class="we-foot">
-          <span class="we-levels">${lvBadges}</span>
           ${techCount
             ? `<span class="we-tech">深度条目 ${techCount}</span>`
             : `<span class="we-tech lite">登记卷</span>`}

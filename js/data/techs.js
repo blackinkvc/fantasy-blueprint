@@ -1,6 +1,6 @@
 // ============================================================
 // 奇幻造物条目数据（核心）
-// 每一条：世界出处、实现分级、所属领域、原理分析、实现路径、依赖关系
+// 每一条：世界出处、所属领域、原理分析、实现路径、依赖关系
 // dependencies 为"本造物所依赖的前置造物 id"，用于科技树 DAG
 // verdict: achieved(符合) / breakthrough(需突破) / violated(违反法则)
 // ============================================================
@@ -10,7 +10,7 @@ const TECHS = [
     id: "real-metallurgy",
     name: "真实冶金与锻造",
     aliases: ["青铜", "钢铁冶炼"],
-    workId: "mythology", level: "L1", domain: "alchemy",
+    workId: "mythology", domain: "alchemy",
     summary: "从矿石冶炼金属、锻造合金，是人类最古老的技术之一，神话中的神兵多以此为原型。",
     description: "从青铜器到坩埚钢，人类用数千年的时间把地下的石头变成兵刃与工具。秘银、瓦雷利亚钢的传说，本质上都是对“更好的钢铁”的想象投射。",
     firstPrinciples: [
@@ -24,7 +24,7 @@ const TECHS = [
     id: "real-herbalism",
     name: "草药与疗愈",
     aliases: ["药典", "自然疗法"],
-    workId: "mythology", level: "L1", domain: "alchemy",
+    workId: "mythology", domain: "alchemy",
     summary: "以植物提取有效成分制药，现实中早已是药学的根基，也是魔药体系的现实母体。",
     description: "阿司匹林来自柳树皮，青蒿素来自青蒿——神话里的“治愈草”很多都有真实原型。魔药、煎药、突变药剂，都是把这套逻辑推到极致。",
     firstPrinciples: [
@@ -38,7 +38,7 @@ const TECHS = [
     id: "real-gunpowder",
     name: "黑火药与燃烧剂",
     aliases: ["火药", "希腊火"],
-    workId: "mythology", level: "L1", domain: "alchemy",
+    workId: "mythology", domain: "alchemy",
     summary: "以硝石、硫磺、木炭混合的燃烧与推进剂，是真实存在且改变历史的炼金产物。",
     description: "中国的火药与拜占庭的希腊火，证明了“配方即威力”。野火、炼金炸弹等设定，是其夸张化的后代。",
     firstPrinciples: [
@@ -52,7 +52,7 @@ const TECHS = [
     id: "real-flight",
     name: "飞行与空气动力学",
     aliases: ["航空器", "升力"],
-    workId: "mythology", level: "L1", domain: "realm",
+    workId: "mythology", domain: "realm",
     summary: "重于空气的飞行已在现实中实现，是飞空艇、传送门等奇幻造物的物理地基。",
     description: "从风筝到喷气客机，人类已征服低空与平流层。飞空艇、浮空城的前提——产生并控制升力——早已不是问题。",
     firstPrinciples: [
@@ -66,7 +66,7 @@ const TECHS = [
     id: "steam-engine",
     name: "蒸汽机与热机",
     aliases: ["外燃机", "锅炉"],
-    workId: "mythology", level: "L1", domain: "artifact",
+    workId: "mythology", domain: "artifact",
     summary: "将热能转为机械能的通用动力装置，是一切机械造物、发条与蒸汽坦克的源头。",
     description: "瓦特之后，蒸汽机驱动了第一次工业革命。齿轮、连杆、凸轮——这套机械语言是魔像、矮人机械、蒸汽坦克的现实祖先。",
     firstPrinciples: [
@@ -80,7 +80,7 @@ const TECHS = [
     id: "dragon-myth",
     name: "龙之传说",
     aliases: ["巨龙", "dragon"],
-    workId: "mythology", level: "L5", domain: "beast",
+    workId: "mythology", domain: "beast",
     summary: "跨文明反复出现的喷火巨翼爬行动物，是幻想生物的原型，现实无对应实体。",
     description: "从北欧的尼德霍格到中国的应龙，龙的形态各异却共享“巨大、飞行、危险”的内核。它是所有“龙”类造物的神话母体。",
     firstPrinciples: [
@@ -94,7 +94,7 @@ const TECHS = [
     id: "necromancy-folklore",
     name: "招魂与亡灵传说",
     aliases: ["通灵", "亡灵术"],
-    workId: "mythology", level: "L5", domain: "lore",
+    workId: "mythology", domain: "lore",
     summary: "召唤并驱使逝者灵魂或尸体的古老母题，现实无对应，是亡灵天灾、魂器的原型。",
     description: "几乎每个文明都有与死者沟通的仪式想象。它把“死亡可逆”“意识可脱离身体”这两个根本愿望，凝结成巫术母题。",
     firstPrinciples: [
@@ -108,7 +108,7 @@ const TECHS = [
     id: "divination-folklore",
     name: "占卜与星命",
     aliases: ["占星", "卜算"],
-    workId: "mythology", level: "L3", domain: "lore",
+    workId: "mythology", domain: "lore",
     summary: "通过观察天象、牌阵、卦象推测命运，现实中可部分对应为模式识别与概率推理。",
     description: "占星、周易、塔罗共享“从表象推演未知”的结构。其现代近似是统计预测与贝叶斯推断——虽不神秘，但确有信息价值。",
     firstPrinciples: [
@@ -122,7 +122,7 @@ const TECHS = [
     id: "alchemy-history",
     name: "历史炼金术",
     aliases: ["点金术", "贤者之术"],
-    workId: "mythology", level: "L2", domain: "alchemy",
+    workId: "mythology", domain: "alchemy",
     summary: "前科学时代以实验追求“贱金属变黄金”与“长生”，虽目标落空，却孕育了化学本身。",
     description: "炼金术士发明了蒸馏、结晶、酸碱操作，留下大量真实工艺。它把“转化物质”的执念，变成了现代化学的胚胎。",
     firstPrinciples: [
@@ -136,7 +136,7 @@ const TECHS = [
     id: "monster-lore",
     name: "怪物知识与狩猎",
     aliases: ["博物学", "狩猎术"],
-    workId: "witcher", level: "L2", domain: "beast",
+    workId: "witcher", domain: "beast",
     summary: "系统记录生物习性、弱点与应对的博物学，现实中对应动物行为与生态研究。",
     description: "猎魔人以图谱与谚语记录怪物，本质是田野博物学。现代生态学、寄生虫学、行为学已能系统解释多数“怪物”现象。",
     firstPrinciples: [
@@ -150,7 +150,7 @@ const TECHS = [
     id: "metamaterial-cloak",
     name: "超材料隐身",
     aliases: ["隐身斗篷", "折射斗篷"],
-    workId: "harry-potter", level: "L2", domain: "artifact",
+    workId: "harry-potter", domain: "artifact",
     summary: "以人工微结构引导电磁波绕行实现“不可见”，现实中已在实验室频段验证。",
     description: "隐身衣的奇幻想象，在现实里对应超材料（metamaterial）对光/电磁波路径的操控。目前可在微波段实现窄带隐身。",
     firstPrinciples: [
@@ -164,7 +164,7 @@ const TECHS = [
     id: "portal-basics",
     name: "传送与空间折叠（理论）",
     aliases: ["量子隐形传态", "空间跳跃"],
-    workId: "dnd", level: "L3", domain: "realm",
+    workId: "dnd", domain: "realm",
     summary: "把物体或信息在两点间瞬时转移，现实里的量子隐形传态能传态不能传物。",
     description: "飞路网、异界门、魔衣橱共享“跨越距离”的内核。现实的量子隐形传态可传输量子态（需经典信道），但传“物”仍属科幻/奇幻。",
     firstPrinciples: [
@@ -178,7 +178,7 @@ const TECHS = [
     id: "scrying",
     name: "远程窥视（占卜镜）",
     aliases: ["水晶球", "真知视界"],
-    workId: "lord-of-rings", level: "L3", domain: "lore",
+    workId: "lord-of-rings", domain: "lore",
     summary: "隔空观察远方之人事物，现实对应为监控网络、卫星与遥感。",
     description: "真知晶球、鱼梁木的绿视共享“看见远处”的愿望。现实中，摄像头、卫星、无人机已让“千里眼”成为基础设施。",
     firstPrinciples: [
@@ -192,7 +192,7 @@ const TECHS = [
     id: "controlled-mutation",
     name: "定向诱变与改造",
     aliases: ["基因改造", "突变育种"],
-    workId: "witcher", level: "L3", domain: "beast",
+    workId: "witcher", domain: "beast",
     summary: "以化学/辐射/基因手段定向改变生物性状，现实中对应诱变育种与基因编辑。",
     description: "鼠人、突变猎魔人、魔改生物都建立在“可控改造生命”之上。CRISPR 与诱变育种已能实现部分，但稳定、可控、跨代可遗传的全身改造仍难。",
     firstPrinciples: [
@@ -206,7 +206,7 @@ const TECHS = [
     id: "transmutation",
     name: "元素嬗变（炼金转化）",
     aliases: ["点石成金", "物质转化"],
-    workId: "mythology", level: "L3", domain: "alchemy",
+    workId: "mythology", domain: "alchemy",
     summary: "把一种元素变为另一种，现实里核嬗变可做到，但需要巨大能量且极不经济。",
     description: "炼金术的终极目标——贱金属变黄金——在核物理层面确有可能，只是代价高昂。它是“物质可被重写”这一执念的科学回声。",
     firstPrinciples: [
@@ -220,7 +220,7 @@ const TECHS = [
     id: "clockwork-automata",
     name: "发条与自动机",
     aliases: ["机械人偶", "automaton"],
-    workId: "warhammer", level: "L2", domain: "artifact",
+    workId: "warhammer", domain: "artifact",
     summary: "以齿轮与程序预演动作的自动机械，现实里从雅克德罗人偶到现代机器人皆其后代。",
     description: "魔像、矮人机械、蒸汽坦克都建立在“预编程机械可自主运行”之上。今天的机器人与 CNC 正是这条线的延伸。",
     firstPrinciples: [
@@ -234,7 +234,7 @@ const TECHS = [
     id: "soul-storage",
     name: "灵魂锚定与存储",
     aliases: ["魂器原理", "灵魂容器"],
-    workId: "harry-potter", level: "L4", domain: "lore",
+    workId: "harry-potter", domain: "lore",
     summary: "把人格/意识锚定于外物以求存续，现实最接近的是意识上传与数字人格的设想。",
     description: "魂器、灵魂石、亡灵复生都假设“自我可脱离身体被保存”。这是意识哲学与脑科学的前沿难题。",
     firstPrinciples: [
@@ -248,7 +248,7 @@ const TECHS = [
     id: "true-name",
     name: "真名支配",
     aliases: ["真名", "言灵"],
-    workId: "earthsea", level: "L5", domain: "magic",
+    workId: "earthsea", domain: "magic",
     summary: "知晓一物之真名便可支配它，是所有“言语即因果”类魔法的公理源头。",
     description: "地海的真名、龙吼、咒文共享一个设定：世界的内在名称即其控制权。现实中语言只描述世界，不构造世界。",
     firstPrinciples: [
@@ -262,7 +262,7 @@ const TECHS = [
     id: "spellcasting",
     name: "法术位施法",
     aliases: ["施法", "咒文"],
-    workId: "dnd", level: "L5", domain: "magic",
+    workId: "dnd", domain: "magic",
     summary: "以意志与咒文直接驱动超自然效应，是绝大多数奇幻魔法的统一范式。",
     description: "从 D&D 的法术位到哈利波特的魔杖，魔法被抽象为“消耗资源→产生效应”的系统。其公理是“意图可直接成为结果”。",
     firstPrinciples: [
@@ -276,7 +276,7 @@ const TECHS = [
     id: "the-one-ring",
     name: "统御魔戒",
     aliases: ["至尊魔戒", "魔戒"],
-    workId: "lord-of-rings", level: "L5", domain: "artifact",
+    workId: "lord-of-rings", domain: "artifact",
     summary: "以一句咒文统御众戒、放大意志并赋予隐形的概念性造物，依赖“咒文即法则”的设定。",
     description: "至尊魔戒是“物品承载意志与支配力”的极致。现实中物品不承载意志，也不跨空间施加支配。",
     firstPrinciples: [
@@ -292,7 +292,7 @@ const TECHS = [
     id: "mithril",
     name: "秘银锻造",
     aliases: ["mithril", "银钢"],
-    workId: "lord-of-rings", level: "L2", domain: "artifact",
+    workId: "lord-of-rings", domain: "artifact",
     summary: "轻于银而坚于钢的稀有金属甲胄，现实中对应高比强度合金与复合材料。",
     description: "秘银是托尔金笔下“理想材料”的代表。今天的钛合金、陶瓷复合装甲已在“轻且硬”上接近其描述。",
     firstPrinciples: [
@@ -306,7 +306,7 @@ const TECHS = [
     id: "palantir",
     name: "真知晶球",
     aliases: ["palantír", "远见石"],
-    workId: "lord-of-rings", level: "L4", domain: "lore",
+    workId: "lord-of-rings", domain: "lore",
     summary: "隔远距窥视并与他者心灵相联的晶球，现实对应为远程视觉+通信，但“心灵联机”超出现实。",
     description: "真知晶球把“看见远方”与“思维互联”结合。前者已被监控网络实现，后者触及脑机接口的远景。",
     firstPrinciples: [
@@ -320,7 +320,7 @@ const TECHS = [
     id: "ent",
     name: "树人（古老生灵）",
     aliases: ["Ent", "牧树者"],
-    workId: "lord-of-rings", level: "L4", domain: "beast",
+    workId: "lord-of-rings", domain: "beast",
     summary: "以树木为身、能言会思的古老生灵，现实对应为植物智能与合成生物的远景。",
     description: "树人是“植物获得行动与意识”的想象。现实里植物有信号网络但无神经，全株移动与言语远超生物现状。",
     firstPrinciples: [
@@ -334,7 +334,7 @@ const TECHS = [
     id: "rings-of-power",
     name: "统御众戒",
     aliases: ["力量之戒", "九戒七戒"],
-    workId: "lord-of-rings", level: "L5", domain: "artifact",
+    workId: "lord-of-rings", domain: "artifact",
     summary: "由至尊魔戒统御的一批赋予能力（不朽、力量）的戒指，属概念性造物。",
     description: "众戒把“佩戴即获得权能”极致化，并受至尊魔戒支配。其机制完全依赖世界观设定的名分公理。",
     firstPrinciples: [
@@ -350,7 +350,7 @@ const TECHS = [
     id: "wand-magic",
     name: "魔杖施法",
     aliases: ["wand", "咒语"],
-    workId: "harry-potter", level: "L5", domain: "magic",
+    workId: "harry-potter", domain: "magic",
     summary: "以魔杖为媒介、手势+咒文直接改写现实，是“工具化魔法”的代表。",
     description: "魔杖把分散的魔法收束进一个手持接口。它仍是“意图直接成真”的魔法公理，只是加了媒介与学习曲线。",
     firstPrinciples: [
@@ -364,7 +364,7 @@ const TECHS = [
     id: "invisibility-cloak",
     name: "隐身衣",
     aliases: ["隐形斗篷", "cloak"],
-    workId: "harry-potter", level: "L3", domain: "artifact",
+    workId: "harry-potter", domain: "artifact",
     summary: "穿戴后不可见的衣物，现实对应为超材料隐身（窄带）与主动伪装。",
     description: "隐身衣把“不被看见”具象为一件衣服。现实的超材料斗篷与自适应迷彩已能在受限条件下实现部分隐身。",
     firstPrinciples: [
@@ -378,7 +378,7 @@ const TECHS = [
     id: "potions",
     name: "魔药炼制",
     aliases: ["药剂", "brew"],
-    workId: "harry-potter", level: "L2", domain: "alchemy",
+    workId: "harry-potter", domain: "alchemy",
     summary: "以草药与生物材料熬煮出超常效用的药剂，现实对应为药物化学与复方制剂。",
     description: "魔药把“配方即效果”推到奇幻程度（变形、增慧）。其现实底座是真实药理学——只是现实中配不出“变身水”。",
     firstPrinciples: [
@@ -392,7 +392,7 @@ const TECHS = [
     id: "horcrux",
     name: "魂器",
     aliases: ["horcrux", "分裂灵魂"],
-    workId: "harry-potter", level: "L5", domain: "lore",
+    workId: "harry-potter", domain: "lore",
     summary: "裂魂藏入器物以求永生，是“灵魂可分割存储”的极端化，完全依赖设定公理。",
     description: "魂器把灵魂容器推到“分裂自我以避死”的极致。现实中灵魂不可分、不可裂，意识同一性也无法如此切割。",
     firstPrinciples: [
@@ -406,7 +406,7 @@ const TECHS = [
     id: "floo-network",
     name: "飞路网（壁炉传送）",
     aliases: ["飞路粉", "floo"],
-    workId: "harry-potter", level: "L3", domain: "realm",
+    workId: "harry-potter", domain: "realm",
     summary: "踏入壁炉并念出地名即可抵达对应壁炉，是“定点传送”的温馨化版本。",
     description: "飞路网把传送收束为“已知节点间瞬移”。现实中对应分布式运输+通信，但物理瞬移仍不可行。",
     firstPrinciples: [
@@ -420,7 +420,7 @@ const TECHS = [
     id: "patronus",
     name: "守护神咒",
     aliases: ["Patronus", "快乐护盾"],
-    workId: "harry-potter", level: "L5", domain: "magic",
+    workId: "harry-potter", domain: "magic",
     summary: "以快乐记忆召唤银色护兽驱散黑暗生物，是纯情感驱动的魔法效应。",
     description: "守护神咒把“情绪直接具象为护体实体”极致化。现实中情绪影响生理但无法凝成实体生物。",
     firstPrinciples: [
@@ -436,7 +436,7 @@ const TECHS = [
     id: "valyrian-steel",
     name: "瓦雷利亚钢",
     aliases: ["龙钢", "Valyrian steel"],
-    workId: "got", level: "L2", domain: "artifact",
+    workId: "got", domain: "artifact",
     summary: "以陨铁折叠锻造、轻韧不朽的传奇钢材，现实对应为顶级大马士革钢与现代合金。",
     description: "瓦雷利亚钢是“失传神兵”的原型。今天的粉末冶金与折叠钢在性能上已可媲美其传说描述。",
     firstPrinciples: [
@@ -450,7 +450,7 @@ const TECHS = [
     id: "dragons-got",
     name: "维斯特洛的龙",
     aliases: ["龙", "Dragon"],
-    workId: "got", level: "L5", domain: "beast",
+    workId: "got", domain: "beast",
     summary: "体型如楼宇、喷吐可燃液体的活体飞行巨兽，受生物尺度与代谢限制不可实现。",
     description: "剧中的龙把神话龙具象为生物兵器。其飞行与喷火在现实生物物理上均不可维持。",
     firstPrinciples: [
@@ -464,7 +464,7 @@ const TECHS = [
     id: "weirwood",
     name: "鱼梁木绿视",
     aliases: ["heart tree", "绿先知"],
-    workId: "got", level: "L4", domain: "lore",
+    workId: "got", domain: "lore",
     summary: "通过嵌入鱼梁木的瞳孔远程窥视与预知，现实对应为分布式传感+通信。",
     description: "鱼梁木网络把“千里眼”植物化、网络化了。现实中遥感与监控可近似其视觉部分，预知仍不可得。",
     firstPrinciples: [
@@ -478,7 +478,7 @@ const TECHS = [
     id: "wildfire",
     name: "野火",
     aliases: ["炼金炸弹", " wildfire"],
-    workId: "got", level: "L2", domain: "alchemy",
+    workId: "got", domain: "alchemy",
     summary: "比希腊火更剧烈、遇水反旺的绿色炼金燃烧剂，现实对应为高活性燃烧剂。",
     description: "野火是“失控的炼金产物”。现实中确有高活性燃烧剂（如铝热剂、白磷），但“遇水更旺”需特殊化学。",
     firstPrinciples: [
@@ -494,7 +494,7 @@ const TECHS = [
     id: "wish",
     name: "许愿术",
     aliases: ["Wish", "祈愿"],
-    workId: "dnd", level: "L5", domain: "magic",
+    workId: "dnd", domain: "magic",
     summary: "以一句愿望直接重排现实因果，是魔法公理的极致——不耗能量，只耗“规则允许”。",
     description: "许愿术把“所愿即所得”推到全知全能的边缘。它不经由任何物理过程，是纯设定层面的因果改写。",
     firstPrinciples: [
@@ -508,7 +508,7 @@ const TECHS = [
     id: "golem",
     name: "魔像",
     aliases: ["Golem", "构装体"],
-    workId: "dnd", level: "L4", domain: "beast",
+    workId: "dnd", domain: "beast",
     summary: "以泥土/金属注入灵魂或咒文而活的构装体，现实对应为机器人与具身智能。",
     description: "魔像是“无生命物质被赋予行动”的想象。今天的机器人与具身 AI 已能在功能上高度近似。",
     firstPrinciples: [
@@ -522,7 +522,7 @@ const TECHS = [
     id: "portal-dnd",
     name: "异界门",
     aliases: ["Portal", "传送门"],
-    workId: "dnd", level: "L3", domain: "realm",
+    workId: "dnd", domain: "realm",
     summary: "稳定开启连接两地的瞬时通道，现实对应为受限的传送理论与远程呈现。",
     description: "异界门把传送收束为“稳定的双向通道”。现实中宏观物体传送不可行，但通道的“连接”意象可由网络近似。",
     firstPrinciples: [
@@ -536,7 +536,7 @@ const TECHS = [
     id: "raise-dead",
     name: "复活术",
     aliases: ["Resurrection", "复生"],
-    workId: "dnd", level: "L4", domain: "lore",
+    workId: "dnd", domain: "lore",
     summary: "使死者复生，现实对应为濒死复苏与低温医学的远景，但真正“死而复生”不可得。",
     description: "复活术把“死亡可逆”直接施为。现实中死亡判定后脑不可逆损伤，复生超出当前医学。",
     firstPrinciples: [
@@ -552,7 +552,7 @@ const TECHS = [
     id: "fel-magic",
     name: "邪能",
     aliases: ["Fel", "混沌绿火"],
-    workId: "warcraft", level: "L5", domain: "magic",
+    workId: "warcraft", domain: "magic",
     summary: "源自扭曲虚空的腐蚀性能量，不经由任何物质-能量转换，属纯设定能量。",
     description: "邪能是“异维度恶意能量”的代表。它绕过能量守恒，是世界观独有的魔法资源。",
     firstPrinciples: [
@@ -566,7 +566,7 @@ const TECHS = [
     id: "undead-scourge",
     name: "亡灵天灾",
     aliases: ["Scourge", "不死瘟疫"],
-    workId: "warcraft", level: "L5", domain: "lore",
+    workId: "warcraft", domain: "lore",
     summary: "以瘟疫批量转化生命为不死的奴兵，完全违反热力学与生物分解规律。",
     description: "亡灵天灾把“死亡可被征用”推到军团规模。现实中尸体分解、能量耗散，无法被“转化”为持续战力。",
     firstPrinciples: [
@@ -580,7 +580,7 @@ const TECHS = [
     id: "portals-wow",
     name: "传送门（艾泽拉斯）",
     aliases: ["Portal", "奥术门"],
-    workId: "warcraft", level: "L3", domain: "realm",
+    workId: "warcraft", domain: "realm",
     summary: "法师开启的瞬时空间门，现实对应为受限传送理论与远程呈现。",
     description: "艾泽拉斯的传送门把“开门即达”常态化。现实中宏观传送不可行，但“门”的意象可由网络与运输近似。",
     firstPrinciples: [
@@ -594,7 +594,7 @@ const TECHS = [
     id: "dragons-wow",
     name: "巨龙（艾泽拉斯）",
     aliases: ["Dragon", "守护巨龙"],
-    workId: "warcraft", level: "L5", domain: "beast",
+    workId: "warcraft", domain: "beast",
     summary: "具智慧、能言、可施法的守护巨龙，受生物尺度与代谢限制不可实现。",
     description: "魔兽的巨龙把神话龙升格为“有智慧的神兽”。其飞行与喷吐在现实生物物理上不可维持。",
     firstPrinciples: [
@@ -608,7 +608,7 @@ const TECHS = [
     id: "titan-forging",
     name: "泰坦造物",
     aliases: ["Titanforged", "星魂造物"],
-    workId: "warcraft", level: "L3", domain: "artifact",
+    workId: "warcraft", domain: "artifact",
     summary: "由泰坦（星魂）以秩序之力塑造的机械生命与器物，现实对应为高级机器人与具身智能。",
     description: "泰坦造物把“被更高存在塑造”具象为机械生命。其功能可由现代机器人近似，但“星魂塑造”属设定。",
     firstPrinciples: [
@@ -624,7 +624,7 @@ const TECHS = [
     id: "dragon-shout",
     name: "龙吼（Thu'um）",
     aliases: ["Thu'um", "真言之力"],
-    workId: "elder-scrolls", level: "L5", domain: "magic",
+    workId: "elder-scrolls", domain: "magic",
     summary: "以真实之语直接命令现实（推开山、定住时），是“真名即权能”的极端化。",
     description: "龙吼把“言语即因果”推到物理层面：一声吼能撼动山脉。它完全依赖“真实语言即世界接口”的设定。",
     firstPrinciples: [
@@ -638,7 +638,7 @@ const TECHS = [
     id: "soul-gem",
     name: "灵魂石",
     aliases: ["Soul Gem", "囚魂晶"],
-    workId: "elder-scrolls", level: "L4", domain: "lore",
+    workId: "elder-scrolls", domain: "lore",
     summary: "囚禁灵魂于晶体以供附魔的造物，现实对应为意识存储与数字人格的远景。",
     description: "灵魂石把“灵魂可压缩存储”工具化。其现实近似是意识上传与数字人格的设想，但仍触及意识本质。",
     firstPrinciples: [
@@ -652,7 +652,7 @@ const TECHS = [
     id: "dwemer",
     name: "矮人机械（ Dwemer ）",
     aliases: ["Dwemer", "远古机械"],
-    workId: "elder-scrolls", level: "L3", domain: "artifact",
+    workId: "elder-scrolls", domain: "artifact",
     summary: "失落文明留下的精密蒸汽机械与自治装置，现实对应为高级机器人与自控系统。",
     description: "矮人科技把“失传的精密机械”具象为会自行运转的造物。其现实底座是现代机器人与自动化。",
     firstPrinciples: [
@@ -666,7 +666,7 @@ const TECHS = [
     id: "daedric",
     name: "魔神器",
     aliases: ["Daedric Artifact", "魔族造物"],
-    workId: "elder-scrolls", level: "L5", domain: "artifact",
+    workId: "elder-scrolls", domain: "artifact",
     summary: "由魔神锻造、具概念性权能的器物（如吸魂剑），依赖世界观独有设定。",
     description: "魔神器把“器物承载神性权能”极致化。其效果（吞噬灵魂、改写命运）完全依赖设定公理。",
     firstPrinciples: [
@@ -682,7 +682,7 @@ const TECHS = [
     id: "soul-transference",
     name: "灵魂转移",
     aliases: ["魂移", "不死诅咒"],
-    workId: "dark-souls", level: "L4", domain: "lore",
+    workId: "dark-souls", domain: "lore",
     summary: "记忆与能力随灵魂在躯体间迁移，现实对应为意识上传与数字自我的远景。",
     description: "魂系把“自我可迁移”置于死亡循环的中心。其现实近似是意识上传，但仍受意识本质约束。",
     firstPrinciples: [
@@ -696,7 +696,7 @@ const TECHS = [
     id: "bonfire",
     name: "营火（检查点）",
     aliases: ["Bonfire", "篝火"],
-    workId: "dark-souls", level: "L5", domain: "artifact",
+    workId: "dark-souls", domain: "artifact",
     summary: "跨死亡重置世界的“存档点”，是元设定层面的概念性造物。",
     description: "营火把“游戏存档”具象为世界观内的实体。它在叙事层面重置状态，属纯设定机制。",
     firstPrinciples: [
@@ -710,7 +710,7 @@ const TECHS = [
     id: "lord-soul",
     name: "王魂",
     aliases: ["Lord Soul", "原初魂"],
-    workId: "dark-souls", level: "L5", domain: "lore",
+    workId: "dark-souls", domain: "lore",
     summary: "赋予神祇级权能的原初灵魂碎片，依赖“灵魂即力量”的设定公理。",
     description: "王魂把“灵魂=能量=权能”推到极致。现实中意识不携带可直接使用的巨量能量。",
     firstPrinciples: [
@@ -724,7 +724,7 @@ const TECHS = [
     id: "greatsword",
     name: "巨剑",
     aliases: "巨刃",
-    workId: "dark-souls", level: "L1", domain: "artifact",
+    workId: "dark-souls", domain: "artifact",
     summary: "超大尺寸的单手/双手剑，现实中作为仪式兵器与工程挑战均有先例。",
     description: "魂系巨剑是“夸张化冷兵器”的代表。现实中的超大剑（如苏格兰斩剑）确实存在，只是实用性有限。",
     firstPrinciples: [
@@ -740,7 +740,7 @@ const TECHS = [
     id: "chaos-magic",
     name: "混沌魔法",
     aliases: ["Chaos", "邪术"],
-    workId: "warhammer", level: "L5", domain: "magic",
+    workId: "warhammer", domain: "magic",
     summary: "直接汲取异维度神祇之力的魔法，施法即与不可名状存在缔约，属纯设定。",
     description: "混沌魔法把“魔法来自危险的外神”具象化。它绕过任何物理能量链，是世界观独有的危险资源。",
     firstPrinciples: [
@@ -754,7 +754,7 @@ const TECHS = [
     id: "warpstone",
     name: "次元石（闹鬼石）",
     aliases: ["Warpstone", "绿石"],
-    workId: "warhammer", level: "L4", domain: "alchemy",
+    workId: "warhammer", domain: "alchemy",
     summary: "来自混沌魔域、扭曲血肉与因果的辐射矿物，现实无对应，是设定独有物质。",
     description: "次元石把“矿物即异常”具象化。它既像放射性又像因果污染，现实中无单一物质能同时具备。",
     firstPrinciples: [
@@ -768,7 +768,7 @@ const TECHS = [
     id: "skaven",
     name: "鼠人",
     aliases: ["Skaven", "鼠族"],
-    workId: "warhammer", level: "L4", domain: "beast",
+    workId: "warhammer", domain: "beast",
     summary: "由人类突变而来的类鼠智慧族群，现实对应为定向诱变与合成生物的远景。",
     description: "鼠人把“定向突变出全新智慧物种”具象化。现实中可局部改造，但塑造完整新物种极难。",
     firstPrinciples: [
@@ -782,7 +782,7 @@ const TECHS = [
     id: "steam-tank",
     name: "蒸汽坦克",
     aliases: ["Steam Tank", "蒸汽战车"],
-    workId: "warhammer", level: "L2", domain: "artifact",
+    workId: "warhammer", domain: "artifact",
     summary: "以蒸汽驱动的装甲战车，现实中对应早期装甲车辆与工程机械。",
     description: "蒸汽坦克把“蒸汽动力+装甲”组合为战场机械。其现实底座是蒸汽工程与车辆制造。",
     firstPrinciples: [
@@ -798,7 +798,7 @@ const TECHS = [
     id: "signs",
     name: "法印",
     aliases: ["Sign", "昆特法印"],
-    workId: "witcher", level: "L3", domain: "magic",
+    workId: "witcher", domain: "magic",
     summary: "以手势与简短意志释放的简单魔法效应（火焰、束缚、误导），现实对应为便携式能量装置。",
     description: "法印把“魔法”降级为可随手释放的小技能。其现实近似是便携能源与效应器（点火、投影、束缚）。",
     firstPrinciples: [
@@ -812,7 +812,7 @@ const TECHS = [
     id: "mutagens",
     name: "突变药剂",
     aliases: ["Mutagen", "青草试炼"],
-    workId: "witcher", level: "L2", domain: "alchemy",
+    workId: "witcher", domain: "alchemy",
     summary: "以剧毒配方重排生理、赋予超感与自愈，现实对应为药物改造与基因治疗。",
     description: "突变药剂把“服药即强化”具象化。现实中药物可局部改造生理，但稳定、可逆、全面的强化仍难。",
     firstPrinciples: [
@@ -826,7 +826,7 @@ const TECHS = [
     id: "decoctions",
     name: "煎药",
     aliases: ["Decoction", "强效药剂"],
-    workId: "witcher", level: "L2", domain: "alchemy",
+    workId: "witcher", domain: "alchemy",
     summary: "以怪物材料熬煮的强效临时增益药剂，现实对应为靶向药物与兴奋剂。",
     description: "煎药把“以敌制敌”的炼金逻辑具象化。现实中靶向药物可提供临时增益，但无怪物素材的奇效。",
     firstPrinciples: [
@@ -842,7 +842,7 @@ const TECHS = [
     id: "wardrobe",
     name: "魔衣橱（异界门）",
     aliases: ["Wardrobe", "衣橱之门"],
-    workId: "narnia", level: "L3", domain: "realm",
+    workId: "narnia", domain: "realm",
     summary: "一件家具背面连通整片异世界，是“日常物即传送门”的温柔版本。",
     description: "魔衣橱把传送收束为“推门即入他界”。现实中宏观传送不可行，但“门”的意象可由空间组织近似。",
     firstPrinciples: [
@@ -856,7 +856,7 @@ const TECHS = [
     id: "aslan-resurrection",
     name: "石桌复活",
     aliases: ["献祭复活", "Lion's sacrifice"],
-    workId: "narnia", level: "L4", domain: "lore",
+    workId: "narnia", domain: "lore",
     summary: "以献祭在石桌重置生命的机制，现实对应为濒死复苏的远景，但“献祭换复活”属神学设定。",
     description: "纳尼亚的复活以象征性献祭为机制。现实中复苏仅限临床早期，且不涉及“代价换生命”。",
     firstPrinciples: [
@@ -870,7 +870,7 @@ const TECHS = [
     id: "stone-table",
     name: "石桌",
     aliases: ["Stone Table", "祭桌"],
-    workId: "narnia", level: "L5", domain: "artifact",
+    workId: "narnia", domain: "artifact",
     summary: "承载献祭与法则重置的概念性圣物，纯设定机制。",
     description: "石桌把“器物承载法则”具象化。其效果（深裂以释放生命）完全依赖世界观的神学设定。",
     firstPrinciples: [
@@ -886,7 +886,7 @@ const TECHS = [
     id: "discworld-geometry",
     name: "碟形世界几何",
     aliases: ["Discworld", "巨龟背上的世界"],
-    workId: "discworld", level: "L5", domain: "realm",
+    workId: "discworld", domain: "realm",
     summary: "平面大陆驮于巨龟象群、绕双星运行的几何，在引力与力学上完全不成立。",
     description: "碟形世界把“世界本身就是笑话”具象化。其几何是对奇幻套路的智性戏仿，物理上不可维持。",
     firstPrinciples: [
@@ -900,7 +900,7 @@ const TECHS = [
     id: "magic-disc",
     name: "八色魔法",
     aliases: ["Octarine", "源质之色"],
-    workId: "discworld", level: "L5", domain: "magic",
+    workId: "discworld", domain: "magic",
     summary: "魔法被量化为八种颜色（第八色为“源质”），是戏仿式设定公理。",
     description: "八色魔法把“魔法可分光”具象化，是对严肃魔法体系的幽默解构。其机制纯属设定。",
     firstPrinciples: [
@@ -914,7 +914,7 @@ const TECHS = [
     id: "librarian",
     name: "图书管理员（红毛猩猩）",
     aliases: ["Librarian", " orangutan"],
-    workId: "discworld", level: "L4", domain: "beast",
+    workId: "discworld", domain: "beast",
     summary: "被法术变为红毛猩猩且拒绝变回的人，现实对应为跨物种基因改造的远景，但“智人↔猿”转换不可行。",
     description: "图书管理员把“变形”以温和荒诞的方式呈现。现实中跨物种整体转换超出基因工程。",
     firstPrinciples: [
@@ -930,7 +930,7 @@ const TECHS = [
     id: "beyonder",
     name: "序列途径（非凡者）",
     aliases: ["Beyonder", "魔药晋升"],
-    workId: "lord-of-the-mysteries", level: "L5", domain: "magic",
+    workId: "lord-of-the-mysteries", domain: "magic",
     summary: "服食魔药沿序列逐级改写生命形态、获得超凡权能，是“物质即权能”的设定公理。",
     description: "诡秘之主把“升级”做成严谨的神秘学体系：每升一级既得能力也逼近疯狂。其机制是“喝下即蜕变”。",
     firstPrinciples: [
@@ -944,7 +944,7 @@ const TECHS = [
     id: "sealed-artifact",
     name: "封印物",
     aliases: ["Sealed Artifact", "收容物"],
-    workId: "lord-of-the-mysteries", level: "L5", domain: "artifact",
+    workId: "lord-of-the-mysteries", domain: "artifact",
     summary: "被收容的、具概念性危险权能的造物，依赖“物品携带异常”的设定公理。",
     description: "封印物把“异常物品”体系化（近似 SCP）。其效果多违反物理，靠“收容”而非“使用”来叙事。",
     firstPrinciples: [
@@ -958,7 +958,7 @@ const TECHS = [
     id: "divination-lom",
     name: "占卜（诡秘）",
     aliases: ["Divination", "命运窥视"],
-    workId: "lord-of-the-mysteries", level: "L3", domain: "lore",
+    workId: "lord-of-the-mysteries", domain: "lore",
     summary: "以仪式与媒介窥探命运与隐秘，现实对应为受限预测与信息搜集。",
     description: "诡秘的占卜把“窥探命运”严肃化。现实中预测科学可部分实现，但“命运”的确定性仍不可得。",
     firstPrinciples: [
@@ -972,7 +972,7 @@ const TECHS = [
     id: "outer-deity",
     name: "外神 / 旧日",
     aliases: ["Outer Deity", "旧日"],
-    workId: "lord-of-the-mysteries", level: "L5", domain: "beast",
+    workId: "lord-of-the-mysteries", domain: "beast",
     summary: "来自宇宙之外的不可名状存在，其存在本身即改写物理与认知，纯设定。",
     description: "外神把“宇宙外的不可知”具象为威胁。其机制是“存在即异常”，完全依赖克苏鲁式设定。",
     firstPrinciples: [
@@ -988,7 +988,7 @@ const TECHS = [
     id: "summon-wind",
     name: "呼风唤雨",
     aliases: ["Wind召唤", "召风"],
-    workId: "earthsea", level: "L3", domain: "magic",
+    workId: "earthsea", domain: "magic",
     summary: "以吟诵古语调动气象，现实对应为人工影响天气（受限）与数值预报。",
     description: "地海的呼风把“语言驱动自然”具象化。现实中人工影响天气（增雨、消雹）有限，且不经吟诵。",
     firstPrinciples: [
@@ -1002,7 +1002,7 @@ const TECHS = [
     id: "rune-earthsea",
     name: "符文（地海）",
     aliases: ["Rune", "古语符"],
-    workId: "earthsea", level: "L3", domain: "magic",
+    workId: "earthsea", domain: "magic",
     summary: "以古语符文铭刻并引导魔力的书写魔法，现实对应为程序化/符号化控制。",
     description: "地海符文把“书写即施法”具象化。现实中编程是对机器最贴近的“符号即控制”，但对自然无效。",
     firstPrinciples: [
@@ -1018,7 +1018,7 @@ const TECHS = [
     id: "materia",
     name: "魔石",
     aliases: ["Materia", "魔珠"],
-    workId: "final-fantasy", level: "L3", domain: "magic",
+    workId: "final-fantasy", domain: "magic",
     summary: "把一段魔法封入可镶嵌结晶、镶嵌即获得能力，现实对应为模块化可插拔功能单元。",
     description: "魔石把“能力即物件”具象化。现实中模块化硬件/软件插件可弱近似“镶嵌即获得能力”。",
     firstPrinciples: [
@@ -1032,7 +1032,7 @@ const TECHS = [
     id: "summon-ff",
     name: "召唤兽",
     aliases: ["Summon", "英灵"],
-    workId: "final-fantasy", level: "L5", domain: "beast",
+    workId: "final-fantasy", domain: "beast",
     summary: "以契约唤来独立存在的巨型生物协同作战，依赖“异界契约”机制，纯设定。",
     description: "召唤兽把“借来一头神兽”具象化。其机制是跨越维度的契约，现实中无对应。",
     firstPrinciples: [
@@ -1046,7 +1046,7 @@ const TECHS = [
     id: "crystal-ff",
     name: "水晶（世界之心）",
     aliases: ["Crystal", "源水晶"],
-    workId: "final-fantasy", level: "L5", domain: "artifact",
+    workId: "final-fantasy", domain: "artifact",
     summary: "作为世界能量心脏的概念性水晶，依赖“晶体即能源核心”的设定公理。",
     description: "FF 水晶把“世界靠一块水晶运转”具象化。现实中能源来自物理过程，不来自概念晶体。",
     firstPrinciples: [
@@ -1060,7 +1060,7 @@ const TECHS = [
     id: "airship",
     name: "飞空艇",
     aliases: ["Airship", "空艇"],
-    workId: "final-fantasy", level: "L2", domain: "realm",
+    workId: "final-fantasy", domain: "realm",
     summary: "在云海之上航行的飞行器，现实对应为飞艇、飞机与垂直起降航空器。",
     description: "飞空艇把“自由飞行”浪漫化。现实中航空器已能实现其形态与功能，只是动力与操控不同。",
     firstPrinciples: [
@@ -1076,7 +1076,7 @@ const TECHS = [
     id: "lyrium",
     name: "莱瑞姆",
     aliases: ["Lyrium", "蓝石"],
-    workId: "dragon-age", level: "L3", domain: "alchemy",
+    workId: "dragon-age", domain: "alchemy",
     summary: "魔法师赖以施法的蓝色矿物，现实对应为特殊功能材料与能源介质。",
     description: "莱瑞姆把“矿物即魔力源”具象化。现实中功能矿物（如锂离子）可弱近似“储能介质”，但无魔法内涵。",
     firstPrinciples: [
@@ -1090,7 +1090,7 @@ const TECHS = [
     id: "blood-magic",
     name: "血魔法",
     aliases: ["Blood Magic", "血祭"],
-    workId: "dragon-age", level: "L5", domain: "magic",
+    workId: "dragon-age", domain: "magic",
     summary: "以献祭生命直接换取魔法效能，是“生命即燃料”的设定公理。",
     description: "血魔法把“代价具象为鲜血”的黑暗魔法具象化。其机制完全依赖设定，现实中无“生命换法力”通道。",
     firstPrinciples: [
@@ -1104,7 +1104,7 @@ const TECHS = [
     id: "thedas-dragon",
     name: "赛达斯巨龙",
     aliases: ["Dragon", "古龙"],
-    workId: "dragon-age", level: "L5", domain: "beast",
+    workId: "dragon-age", domain: "beast",
     summary: "远古造物级的飞行巨兽，受生物尺度与代谢限制不可实现。",
     description: "龙腾的巨龙把神话龙置于“远古造物”语境。其飞行与吐息在现实生物物理上不可维持。",
     firstPrinciples: [
@@ -1118,7 +1118,7 @@ const TECHS = [
     id: "fade",
     name: "幽冥界（ Fade ）",
     aliases: ["The Fade", "梦境维度"],
-    workId: "dragon-age", level: "L4", domain: "realm",
+    workId: "dragon-age", domain: "realm",
     summary: "与现实交叠的梦境维度，睡眠与死亡皆可通往，拓扑上不成立，属设定。",
     description: "幽冥界把“梦是另一个地方”具象化。现实中梦是脑状态，不存在可通往的独立维度。",
     firstPrinciples: [
@@ -1134,7 +1134,7 @@ const TECHS = [
     id: "philosopher-stone",
     name: "贤者之石",
     aliases: ["Philosopher's Stone", "点金石"],
-    workId: "mythology", level: "L5", domain: "alchemy",
+    workId: "mythology", domain: "alchemy",
     summary: "传说中兼能点金与赐永生的终极造物，依赖“一物解万难”的设定公理。",
     description: "贤者之石是炼金术的巅峰幻想：一块石头同时解开转化与永生。现实中二者皆无单一解。",
     firstPrinciples: [

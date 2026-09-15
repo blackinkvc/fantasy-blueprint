@@ -5,7 +5,7 @@
 //       适配后缩成微缩点，完全不可读。
 // 新方案：① 先求依赖图的「连通分量」；② 每个分量内部做无重叠的分层 DAG；
 //         ③ 把各分量像货架一样紧凑排布成网格。孤立造物不再撑高整图。
-// 节点改为纸质底 + 墨边 + 分级色条，更像"思维导图"。
+// 节点改为纸质底 + 墨边 + 领域色条，更像"思维导图"。
 // ============================================================
 const TT_NODE_W = 184;
 const TT_NODE_H = 60;
@@ -17,7 +17,7 @@ const TT_PACK_Y = 64;  // 分量之间垂直留白
 const TT_ROW_W = 1500; // 货架目标行宽（超过则换行）
 
 const TechTreeView = {
-  state: { levels: [], domains: [], focus: "" },
+  state: { domains: [], focus: "" },
 
   mount() {
     const c = document.getElementById("tree-canvas");
@@ -36,10 +36,7 @@ const TechTreeView = {
   },
 
   render() {
-    this.state = { levels: [], domains: [], focus: "" };
-    const levelsFilter = Object.values(LEVELS)
-      .sort((a, b) => a.order - b.order)
-      .map(l => `<button class="flt tflt" data-lv="${l.key}">${l.badge}</button>`).join("");
+    this.state = { domains: [], focus: "" };
     const domainFilter = Object.values(DOMAINS)
       .map(d => `<button class="flt tflt" data-dom="${d.key}">${d.icon}${d.label}</button>`).join("");
 
@@ -52,10 +49,8 @@ const TechTreeView = {
     return `
       <section class="page-title">
         <h1>造物树</h1>
-        <p>依赖图按「连通分量」拆成若干棵小树：彼此无依赖关系的技术各成一支，有依赖者向左溯源、向右展开。墨色越深，离现实越远。</p>
+        <p>依赖图按「连通分量」拆成若干棵小树：彼此无依赖关系的技术各成一支，有依赖者向左溯源、向右展开。</p>
       </section>
-
-      ${ProgressCharts.overviewPanel()}
 
       <section class="tree-controls">
         <div class="filter-row"><label>聚焦世界观</label>
@@ -64,17 +59,12 @@ const TechTreeView = {
             ${workOpts}
           </select>
         </div>
-        <div class="filter-row"><label>分级</label><div class="chips">${levelsFilter}</div></div>
         <div class="filter-row"><label>领域</label><div class="chips">${domainFilter}</div></div>
         <div class="tree-btns">
           <button class="btn" data-action="fit">适配全图</button>
           <button class="btn" data-action="zoom-in">＋</button>
           <button class="btn" data-action="zoom-out">－</button>
           <button class="btn" data-action="reset">重置</button>
-        </div>
-        <div class="legend">
-          ${Object.values(LEVELS).sort((a, b) => a.order - b.order).map(l =>
-            `<span class="leg"><i style="background:${l.color}"></i>${l.badge}</span>`).join("")}
         </div>
       </section>
 
@@ -171,9 +161,8 @@ const TechTreeView = {
   },
 
   draw(container) {
-    const { levels, domains, focus } = this.state;
+    const { domains, focus } = this.state;
     let nodes = TECHS.filter(t =>
-      (!levels.length || levels.includes(t.level)) &&
       (!domains.length || domains.includes(t.domain))
     );
     if (focus) {
@@ -206,7 +195,6 @@ const TechTreeView = {
     }).join("");
 
     const nodeEls = nodes.map(n => {
-      const lv = LEVELS[n.level];
       const dom = DOMAINS[n.domain];
       const p = place[n.id];
       if (!p) return "";
@@ -214,10 +202,9 @@ const TechTreeView = {
       return `
         <g class="tree-node" transform="translate(${p.x},${p.y})" data-id="${n.id}" style="cursor:pointer">
           <rect width="${TT_NODE_W}" height="${TT_NODE_H}" rx="3" fill="var(--paper)" stroke="#141414" stroke-width="1.4"/>
-          <rect width="6" height="${TT_NODE_H}" rx="2" fill="${lv.color}"/>
-          <text x="16" y="20" text-anchor="start" class="tn-flag">${lv.glyph} ${lv.key}</text>
-          <text x="16" y="38" text-anchor="start" class="tn-name">${name}</text>
-          <text x="16" y="52" text-anchor="start" class="tn-sub">${lv.badge} · ${dom.label}</text>
+          <rect width="6" height="${TT_NODE_H}" rx="2" fill="${dom.color}"/>
+          <text x="16" y="28" text-anchor="start" class="tn-name">${name}</text>
+          <text x="16" y="48" text-anchor="start" class="tn-sub">${dom.label}</text>
         </g>`;
     }).join("");
 
@@ -237,8 +224,7 @@ const TechTreeView = {
       const t = TECHS.find(x => x.id === id);
       if (!t) return;
       g.addEventListener("mousemove", (e) => {
-        const lv = LEVELS[t.level];
-        tip.innerHTML = `<strong>${t.name}</strong><span class="tt-lv">${lv.badge}</span><p>${t.summary}</p>`;
+        tip.innerHTML = `<strong>${t.name}</strong><p>${t.summary}</p>`;
         tip.style.display = "block";
         const r = container.getBoundingClientRect();
         tip.style.left = (e.clientX - r.left + 16) + "px";
@@ -267,12 +253,10 @@ document.addEventListener("click", (e) => {
 
   const tf = e.target.closest(".tflt");
   if (tf) {
-    const isLv = tf.dataset.lv;
-    const key = isLv ? "levels" : "domains";
-    const val = isLv ? tf.dataset.lv : tf.dataset.dom;
-    const arr = TechTreeView.state[key];
-    if (arr.includes(val)) { TechTreeView.state[key] = arr.filter(x => x !== val); tf.classList.remove("on"); }
-    else { TechTreeView.state[key] = [...arr, val]; tf.classList.add("on"); }
+    const val = tf.dataset.dom;
+    const arr = TechTreeView.state.domains;
+    if (arr.includes(val)) { TechTreeView.state.domains = arr.filter(x => x !== val); tf.classList.remove("on"); }
+    else { TechTreeView.state.domains = [...arr, val]; tf.classList.add("on"); }
     TechTreeView.draw(treeCanvas);
     return;
   }

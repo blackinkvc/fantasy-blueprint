@@ -7,7 +7,6 @@ const DetailView = {
     const t = TECHS.find(x => x.id === id);
     if (!t) return `<div class="not-found"><h1>未找到</h1><p>造物条目「${id}」不存在。</p><a class="btn" href="#/">返回首页</a></div>`;
 
-    const lv = LEVELS[t.level];
     const dom = DOMAINS[t.domain];
     const work = WORKS.find(w => w.id === t.workId);
 
@@ -49,42 +48,32 @@ const DetailView = {
       .map(d => `<a class="dep-link" href="#/tech/${d.id}">${d.name}</a>`).join(" ") || '<span class="muted">暂无下游技术</span>';
 
     // 相关条目
-    const related = TECHS.filter(x => x.id !== t.id && (x.workId === t.workId || x.domain === t.domain || x.level === t.level))
-      .slice(0, 6).map(x => {
-        const xlv = LEVELS[x.level];
-        return `<a class="chip-link" href="#/tech/${x.id}" style="--lvcolor:${xlv.color}">${x.name}</a>`;
-      }).join("");
+    const related = TECHS.filter(x => x.id !== t.id && (x.workId === t.workId || x.domain === t.domain))
+      .slice(0, 6).map(x =>
+        `<a class="chip-link" href="#/tech/${x.id}">${x.name}</a>`
+      ).join("");
 
     return `
       <article class="detail">
         <nav class="breadcrumb"><a href="#/">首页</a> / <a href="#/category">检索</a> / <a href="#/work/${t.workId}">《${work ? work.title : t.workId}》</a></nav>
 
-        <header class="detail-head" style="--lvcolor:${lv.color}">
+        <header class="detail-head">
           <div class="dh-top">
             <div>
               <h1>${t.name}</h1>
               ${t.aliases.length ? `<p class="aliases">别名：${t.aliases.join(" / ")}</p>` : ""}
-            </div>
-            <div class="dh-badges">
-              <span class="lv-badge big" style="--lvcolor:${lv.color}">${lv.badge}</span>
             </div>
           </div>
           <p class="summary">${t.summary}</p>
           <div class="dh-meta">
             <span class="meta-item">作品：<a href="#/work/${t.workId}">《${work ? work.title : t.workId}》</a></span>
             <span class="meta-item" style="--dcolor:${dom.color}">领域：${dom.icon} ${dom.label}</span>
-            <span class="meta-item">分级：${lv.key} · ${lv.label}</span>
           </div>
         </header>
 
-        <section class="block tech-progress">
-          <h2>实现进度</h2>
-          ${ProgressCharts.techMeter(t)}
-        </section>
-
         <figure class="davinci-plate">
           <img src="${DaVinciImg.forTech(t)}" alt="${t.name} 古卷铭图">
-          <figcaption>铭图 · 古卷手稿 · ${dom.label}领域 ${lv.label}造物示意</figcaption>
+          <figcaption>铭图 · 古卷手稿 · ${dom.label}领域造物示意</figcaption>
         </figure>
 
         <section class="block">

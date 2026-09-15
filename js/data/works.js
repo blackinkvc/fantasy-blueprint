@@ -2,7 +2,7 @@
 // 奇幻世界观档案数据
 // 每个奇幻作品/体系的世界观设定、与现实法则偏离的设定、及所涉造物
 // 字段对齐模板：id / series / treeLit / year / title / creator /
-//        media / era / setting / physicalDivergences / techLevels / representativeTechs
+//        media / era / setting / physicalDivergences / representativeTechs
 // treeLit 使用科技树节点 id（F魔法 B生灵 A炼金 R界域 W造物 L秘术 1-5层）
 // ============================================================
 const WORKS = [
@@ -20,7 +20,6 @@ const WORKS = [
       "神话中的龙、不死、点石成金：皆为前科学时代对自然现象的拟人化解释，现实无对应实体或工艺。",
       "历史炼金术与占星：其符号体系真实存在（文献可考），但“贱金属变黄金”“星命决定命运”的诉求违反化学与力学。"
     ],
-    techLevels: ["L1", "L2", "L3", "L5"],
     representativeTechs: ["real-metallurgy", "dragon-myth", "necromancy-folklore", "alchemy-history"]
   },
   {
@@ -37,7 +36,6 @@ const WORKS = [
       "至尊魔戒的意志绑定：一枚戒指能承载并施加跨越大陆的支配意志，依赖“咒文即法则”的设定逻辑。",
       "秘银与精灵锻造：以现实冶金手段可近似其性能，但“轻如蚕丝、坚胜钢铁”且自带魔法属性超出材料科学。"
     ],
-    techLevels: ["L2", "L4", "L5"],
     representativeTechs: ["the-one-ring", "mithril", "palantir", "ent"]
   },
   {
@@ -54,7 +52,6 @@ const WORKS = [
       "魂器：将灵魂分裂并锚定于外物以实现永生，涉及意识与人格的可分割性，远超神经科学。",
       "魔杖施法：以手势与咒文直接改写现实（漂浮、点火、变形），依赖“言语即因果”的魔法公理。"
     ],
-    techLevels: ["L2", "L3", "L5"],
     representativeTechs: ["wand-magic", "invisibility-cloak", "horcrux", "floo-network"]
   },
   {
@@ -71,7 +68,6 @@ const WORKS = [
       "龙：体型如楼宇、喷吐可燃液体的活体飞行巨兽，其代谢与飞行力学在现实生物尺度上不可维持。",
       "瓦雷利亚钢：以陨铁与咒术折叠锻造、永不锈蚀且轻易斩断寻常钢，属失传工艺 + 设定加成。"
     ],
-    techLevels: ["L2", "L4", "L5"],
     representativeTechs: ["valyrian-steel", "dragons-got", "weirwood", "wildfire"]
   },
   {
@@ -88,7 +84,6 @@ const WORKS = [
       "许愿术：以一句愿望直接重排现实因果，是 L5 的极致——不消耗能量，只消耗“规则允许”。",
       "法术位：把施法量化成每日可恢复的能量槽，是游戏化公理，不对应任何生理或物理过程。"
     ],
-    techLevels: ["L3", "L4", "L5"],
     representativeTechs: ["spellcasting", "wish", "golem", "portal-dnd"]
   },
   {
@@ -105,7 +100,6 @@ const WORKS = [
       "亡灵天灾：以瘟疫与诅咒批量转化生命体为不死、且保留战力，违反热力学与生物分解规律。",
       "邪能：源自异维度虚空的纯粹腐蚀性能量，不经由任何可识别的物质-能量转换链。"
     ],
-    techLevels: ["L3", "L5"],
     representativeTechs: ["fel-magic", "undead-scourge", "portals-wow", "dragons-wow"]
   },
   {
@@ -122,7 +116,6 @@ const WORKS = [
       "龙吼（Thu'um）：以真实名称直接命令现实（推开山、定住时间），是“真名即权能”的极端化。",
       "灵魂石：把离散的灵魂压缩进晶体再灌入器物，依赖灵魂是可存储的实体这一设定。"
     ],
-    techLevels: ["L3", "L4", "L5"],
     representativeTechs: ["dragon-shout", "soul-gem", "dwemer", "daedric"]
   },
   {
@@ -139,7 +132,6 @@ const WORKS = [
       "灵魂转移：记忆、能力与自我可随灵魂在躯体间迁移，意识连续性不绑死于大脑。",
       "营火/篝火：作为跨越死亡、重置世界的“检查点”，是元设定层面的概念性造物。"
     ],
-    techLevels: ["L1", "L4", "L5"],
     representativeTechs: ["soul-transference", "bonfire", "lord-soul", "greatsword"]
   },
   {
@@ -156,7 +148,6 @@ const WORKS = [
       "次元石（闹鬼石）：来自混沌魔域、能扭曲血肉与因果的辐射性矿物，现实中无对应物。",
       "混沌魔法：直接汲取异维度神祇之力，施法即与不可名状的存在缔约。"
     ],
-    techLevels: ["L2", "L4", "L5"],
     representativeTechs: ["chaos-magic", "warpstone", "skaven", "steam-tank"]
   },
   {
@@ -173,7 +164,6 @@ const WORKS = [
       "青草试炼：以剧毒与 ritual 重排少年生理、赋予超感与自愈，超出当前基因/毒理工程。",
       "突变药剂体系：可重复服用、稳定改变代谢与能力的“炼金改造”，现实仅处萌芽。"
     ],
-    techLevels: ["L2", "L3", "L5"],
     representativeTechs: ["signs", "mutagens", "monster-lore", "decoctions"]
   },
   {
@@ -190,7 +180,6 @@ const WORKS = [
       "魔衣橱异界门：一件家具背面连通整片异世界，空间拓扑上不成立。",
       "石桌献祭与复活：以象征性献祭重置生命，是神学机制而非生理过程。"
     ],
-    techLevels: ["L3", "L4", "L5"],
     representativeTechs: ["wardrobe", "aslan-resurrection", "stone-table"]
   },
   {
@@ -207,7 +196,6 @@ const WORKS = [
       "碟形世界几何：平面大陆 + 巨龟 + 象群，在引力与力学上完全不成立。",
       "八色魔法：魔法被量化为八种颜色（第八种为“ octairon ”），是戏仿式的设定公理。"
     ],
-    techLevels: ["L3", "L4", "L5"],
     representativeTechs: ["discworld-geometry", "magic-disc", "librarian"]
   },
   {
@@ -224,7 +212,6 @@ const WORKS = [
       "序列途径：服食魔药逐级改写生命形态、获得超凡权能，是“物质即权能”的设定公理。",
       "外神/旧日：来自宇宙之外的不可名状存在，其存在本身即改写物理与认知。"
     ],
-    techLevels: ["L3", "L4", "L5"],
     representativeTechs: ["beyonder", "sealed-artifact", "divination-lom", "outer-deity"]
   },
   {
@@ -241,7 +228,6 @@ const WORKS = [
       "真名支配：以“真正的名字”直接命令万物，是“知即能”的极端语言学公理。",
       "呼风唤雨：以吟诵古语调动气象，不经由任何能量传递机制。"
     ],
-    techLevels: ["L3", "L5"],
     representativeTechs: ["true-name", "summon-wind", "rune-earthsea"]
   },
   {
@@ -258,7 +244,6 @@ const WORKS = [
       "魔石：把一段魔法封入小晶体、镶嵌即获得该能力，是“能力即物件”的设定。",
       "召唤兽：以契约唤来独立存在的巨型生物协同作战，依赖“异界契约”机制。"
     ],
-    techLevels: ["L2", "L3", "L5"],
     representativeTechs: ["materia", "summon-ff", "crystal-ff", "airship"]
   },
   {
@@ -275,7 +260,6 @@ const WORKS = [
       "血魔法：以献祭生命直接换取魔法效能，是“生命即燃料”的设定公理。",
       "幽冥界：一个与现实交叠的梦境维度，睡眠与死亡皆可通往，拓扑上不成立。"
     ],
-    techLevels: ["L3", "L4", "L5"],
     representativeTechs: ["lyrium", "blood-magic", "thedas-dragon", "fade"]
   }
 ];

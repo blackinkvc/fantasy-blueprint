@@ -4,27 +4,15 @@
 // ============================================================
 const CategoryView = {
   render(query) {
-    const level = query.level || "ALL";
     const domains = (query.domains ? query.domains.split(",") : []).filter(Boolean);
     const keyword = (query.q || "").toLowerCase();
 
     // 筛选
     let list = TECHS.slice();
-    if (level !== "ALL") list = list.filter(t => t.level === level);
     if (domains.length) list = list.filter(t => domains.includes(t.domain));
     if (keyword) list = list.filter(t =>
       (t.name + " " + t.aliases.join(" ") + " " + t.summary + " " + t.tags.join(" ")).toLowerCase().includes(keyword)
     );
-
-    // 五级单选按钮
-    const levelBtns = [{ key: "ALL", badge: "全部" }, ...Object.values(LEVELS).sort((a, b) => a.order - b.order)]
-      .map(lv => {
-        const k = lv.key;
-        if (k === "ALL") {
-          return `<button class="flt ${level === "ALL" ? "on" : ""}" data-k="ALL">全部</button>`;
-        }
-        return `<button class="flt ${level === k ? "on" : ""}" style="--fc:${lv.color}" data-k="${k}">${lv.badge}</button>`;
-      }).join("");
 
     // 领域多选按钮
     const domainBtns = Object.values(DOMAINS).map(d => {
@@ -40,14 +28,10 @@ const CategoryView = {
     return `
       <section class="page-title">
         <h1>造物检索</h1>
-        <p>分级、领域、关键词——三重过滤，查遍全卷。</p>
+        <p>领域、关键词——双重过滤，查遍全卷。</p>
       </section>
 
       <section class="filter-bar">
-        <div class="filter-row">
-          <label>实现分级</label>
-          <div class="chips">${levelBtns}</div>
-        </div>
         <div class="filter-row">
           <label>造物领域</label>
           <div class="chips">${domainBtns}</div>
@@ -68,16 +52,13 @@ const CategoryView = {
   },
 
   card(t) {
-    const lv = LEVELS[t.level];
     const dom = DOMAINS[t.domain];
     const work = WORKS.find(w => w.id === t.workId);
     return `
-      <a class="tech-card" href="#/tech/${t.id}" style="--lvcolor:${lv.color}">
-        <div class="lv-stripe"></div>
+      <a class="tech-card" href="#/tech/${t.id}">
         <div class="tc-main">
           <div class="tc-title">
             <h3>${t.name}</h3>
-            <span class="lv-badge" style="--lvcolor:${lv.color}">${lv.badge}</span>
           </div>
           <p class="summary">${t.summary}</p>
           <div class="tc-meta">
@@ -96,17 +77,12 @@ document.addEventListener("click", (e) => {
   if (!btn) return;
   if (!location.hash.startsWith("#/category")) return;
   const { query } = Router.parseHash();
-  let level = query.level || "ALL";
   let domains = (query.domains ? query.domains.split(",") : []).filter(Boolean);
-  if (btn.dataset.k) {
-    level = btn.dataset.k;
-  }
   if (btn.dataset.d) {
     const k = btn.dataset.d;
     domains = domains.includes(k) ? domains.filter(x => x !== k) : [...domains, k];
   }
   const qs = new URLSearchParams();
-  if (level !== "ALL") qs.set("level", level);
   if (domains.length) qs.set("domains", domains.join(","));
   if (query.q) qs.set("q", query.q);
   location.hash = "#/category" + (qs.toString() ? "?" + qs.toString() : "");
@@ -120,7 +96,6 @@ document.addEventListener("input", (e) => {
   kwTimer = setTimeout(() => {
     const { query } = Router.parseHash();
     const qs = new URLSearchParams();
-    if (query.level) qs.set("level", query.level);
     if (query.domains) qs.set("domains", query.domains);
     if (e.target.value.trim()) qs.set("q", e.target.value.trim());
     location.hash = "#/category" + (qs.toString() ? "?" + qs.toString() : "");
