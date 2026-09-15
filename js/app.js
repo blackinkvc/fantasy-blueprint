@@ -17,7 +17,6 @@ function esc(s) { return escapeHtml(s); }
   Router.register("/works", (ctx) => WorksView.render(ctx.query));
   Router.register("/relations", () => RelationsView.render(), () => RelationsView.mount());
   Router.register("/audit", () => AuditView.render(), () => AuditView.mount());
-  Router.register("/sop", () => SopView.render(), () => SopView.mount());
 
   document.addEventListener("DOMContentLoaded", () => Router.init());
 

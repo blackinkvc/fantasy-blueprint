@@ -1,6 +1,6 @@
 // ============================================================
 // 造物条目详情页视图
-// 头部信息 + 设定 + 原理分析表 + 实现路径时间线 + SOP + 依赖关系 + 相关条目
+// 头部信息 + 设定 + 原理分析表 + 实现路径时间线 + 依赖关系 + 相关条目
 // ============================================================
 const DetailView = {
   render(id) {
@@ -30,12 +30,6 @@ const DetailView = {
     const pathItems = t.implementation.path.map((step, i) =>
       `<li class="tl-item"><span class="tl-num">${i + 1}</span><span class="tl-text">${step}</span></li>`
     ).join("");
-
-    // 本阶段贯彻的方法论（据 sopStage 前缀映射）
-    const stageCode = ((t.implementation.sopStage || "").match(/^SOP-\d/) || [])[0];
-    const methodChips = ((stageCode && STAGE_METHODS[stageCode]) || [])
-      .map(k => getMethod(k)).filter(Boolean)
-      .map(m => `<a class="m-chip" href="#/sop?m=${m.key}">${m.code} ${m.label}</a>`).join("");
 
     // 依赖前置
     const deps = (t.dependencies || []).map(did => {
@@ -95,13 +89,6 @@ const DetailView = {
           <p class="body-text">现状：${t.implementation.current}</p>
           <ul class="timeline">${pathItems}</ul>
           ${t.implementation.blockers.length ? `<div class="blockers"><strong>关键瓶颈：</strong>${t.implementation.blockers.map(b => `<span class="tag danger">${b}</span>`).join(" ")}</div>` : ""}
-        </section>
-
-        <section class="block">
-          <h2>对应研发阶段</h2>
-          <p class="sop-tag">${t.implementation.sopStage}</p>
-          ${methodChips ? `<div class="sop-methods"><span class="sm-label">本阶段贯彻</span>${methodChips}</div>` : ""}
-          <a class="btn ghost" href="#/sop">查看完整研发 SOP →</a>
         </section>
 
         <section class="block deps">
