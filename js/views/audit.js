@@ -1,9 +1,9 @@
 // ============================================================
 // 开发进度跟踪页（#/audit）
 // 实时由 TECHS / WORKS 推导：
-//   · 已收录世界观 / 技术总数
-//   · 每个世界观的技术数量与完成度
-//   · 每条技术的完整度评分与自评诊断
+//   · 已收录世界观 / 概念总数
+//   · 每个世界观的概念数量与完成度
+//   · 每条概念的完整度评分与自评诊断
 //   · 待补写缺口（质量性 + 结构性）
 // 纯静态、零依赖、档案风。
 // ============================================================
@@ -36,7 +36,7 @@ const AuditView = {
     if (fp < 2) tags.push("原理分析不足");
     const p = (t.implementation && t.implementation.path) ? t.implementation.path.length : 0;
     if (p < 2) tags.push("实现路径简略");
-    if ((t.dependencies || []).length < 1) tags.push("未接入技术树");
+    if ((t.dependencies || []).length < 1) tags.push("未接入概念树");
     if (!tags.length) tags.push("可小幅润色");
     return tags;
   },
@@ -52,7 +52,7 @@ const AuditView = {
     const byWork = {};
     TECHS.forEach(t => { (byWork[t.workId] = byWork[t.workId] || []).push(t); });
 
-    // 技术维度
+    // 概念维度
     const techRows = TECHS.map(t => {
       const score = this._techScore(t);
       return {
@@ -67,7 +67,7 @@ const AuditView = {
     const workRows = WORKS.map(w => {
       const list = byWork[w.id] || [];
       const avg = list.length ? list.reduce((a, t) => a + this._techScore(t), 0) / list.length : 0;
-      const coverage = Math.min(100, list.length / 4 * 100); // 以每世界观≥4项技术为完整基线
+      const coverage = Math.min(100, list.length / 4 * 100); // 以每世界观≥4项概念为完整基线
       const completion = Math.round(0.7 * avg + 0.3 * coverage);
       return {
         id: w.id, title: w.title, n: list.length,
@@ -114,7 +114,7 @@ const AuditView = {
         <text x="${(x + bw / 2).toFixed(1)}" y="${(baseY + 36).toFixed(1)}" text-anchor="middle" class="c-sub">${it.sub}</text>
       </g>`;
     }).join("");
-    return `<svg class="chart-svg" viewBox="0 0 ${W} ${padT + plotH + padB}" role="img" aria-label="技术完成度分布">${grid.join("")}
+    return `<svg class="chart-svg" viewBox="0 0 ${W} ${padT + plotH + padB}" role="img" aria-label="概念完成度分布">${grid.join("")}
       <line x1="${padL}" y1="${baseY}" x2="${W - padR}" y2="${baseY}" class="c-base"/>${bars}</svg>`;
   },
 
@@ -193,27 +193,27 @@ const AuditView = {
       <section class="view audit-view">
         <header class="view-head">
           <h1>开发进度跟踪</h1>
-          <p class="muted note">本页由全站数据实时推导：已收录的世界观与技术数量、每个世界观的技术完成度、每条技术的自评质量，以及待补写缺口。每次补完数据后刷新即更新。</p>
+          <p class="muted note">本页由全站数据实时推导：已收录的世界观与概念数量、每个世界观的概念完成度、每条概念的自评质量，以及待补写缺口。每次补完数据后刷新即更新。</p>
         </header>
 
         <div class="audit-stats">
           <div class="as-card"><span class="as-num">${d.works}</span><span class="as-lbl">收录世界观</span></div>
-          <div class="as-card"><span class="as-num">${d.total}</span><span class="as-lbl">收录技术</span></div>
-          <div class="as-card"><span class="as-num">${avgPct}%</span><span class="as-lbl">技术平均完整度</span></div>
-          <div class="as-card warn"><span class="as-num">${needImprove}</span><span class="as-lbl">可深化技术<br>（非优秀）</span></div>
+          <div class="as-card"><span class="as-num">${d.total}</span><span class="as-lbl">收录概念</span></div>
+          <div class="as-card"><span class="as-num">${avgPct}%</span><span class="as-lbl">概念平均完整度</span></div>
+          <div class="as-card warn"><span class="as-num">${needImprove}</span><span class="as-lbl">可深化概念<br>（非优秀）</span></div>
           <div class="as-card warn"><span class="as-num">≈${d.structuralGap}</span><span class="as-lbl">结构缺口<br>（补齐至每世界观≥4项）</span></div>
         </div>
 
         <div class="audit-grid2">
           <figure class="audit-fig">
-            <figcaption>技术完成度分布（按自评质量分）</figcaption>
+            <figcaption>概念完成度分布（按自评质量分）</figcaption>
             ${this._bandBars(d.bands, d.total)}
             <p class="muted note">优秀 ${d.bands.excellent} · 良好 ${d.bands.good} · 待补 ${d.bands.weak}</p>
           </figure>
           <figure class="audit-fig">
             <figcaption>世界观完成度分布（每世界观综合评分）</figcaption>
             ${this._workCompHist(d.workRows)}
-            <p class="muted note">综合＝0.7×技术平均质量＋0.3×技术覆盖度（以≥4项/世界观为满）</p>
+            <p class="muted note">综合＝0.7×概念平均质量＋0.3×概念覆盖度（以≥4项/世界观为满）</p>
           </figure>
         </div>
 
@@ -222,10 +222,10 @@ const AuditView = {
             <h2>补完待办</h2>
             <span id="todo-count" class="ab-meta">已完成 ${todoDone} / 共 ${todo.length}</span>
           </div>
-          <p class="muted note">下列技术自评未达「内容完整」，勾选表示已在原数据文件中补写完善。状态保存在本机浏览器，刷新或重访后保留；新增待补项会自动出现。</p>
+          <p class="muted note">下列概念自评未达「内容完整」，勾选表示已在原数据文件中补写完善。状态保存在本机浏览器，刷新或重访后保留；新增待补项会自动出现。</p>
           <div class="audit-table-wrap todo-wrap">
             <table class="audit-table" id="audit-todo-table">
-              <thead><tr><th></th><th>技术</th><th>所属世界观</th><th>完整度</th><th>待补方向</th></tr></thead>
+              <thead><tr><th></th><th>概念</th><th>所属世界观</th><th>完整度</th><th>待补方向</th></tr></thead>
               <tbody>${todoHtml}</tbody>
             </table>
           </div>
@@ -237,7 +237,7 @@ const AuditView = {
             <figure class="audit-fig">
               <figcaption>按领域</figcaption>
               <div class="audit-table-wrap" style="max-height:none;border:none;overflow:visible">
-                <table class="audit-table"><thead><tr><th>领域</th><th>技术数</th><th>平均质量</th><th>优劣构成</th></tr></thead><tbody>${domainRows}</tbody></table>
+                <table class="audit-table"><thead><tr><th>领域</th><th>概念数</th><th>平均质量</th><th>优劣构成</th></tr></thead><tbody>${domainRows}</tbody></table>
               </div>
             </figure>
           </div>
@@ -245,18 +245,18 @@ const AuditView = {
 
         <section class="audit-block">
           <div class="ab-head">
-            <h2>各世界观技术完成度</h2>
+            <h2>各世界观概念完成度</h2>
             <div class="ab-sort">
               <span>排序：</span>
               <button class="ab-btn active" data-sort="completion" data-dir="asc">完成度↑</button>
               <button class="ab-btn" data-sort="completion" data-dir="desc">完成度↓</button>
-              <button class="ab-btn" data-sort="n" data-dir="asc">技术数↑</button>
-              <button class="ab-btn" data-sort="n" data-dir="desc">技术数↓</button>
+              <button class="ab-btn" data-sort="n" data-dir="asc">概念数↑</button>
+              <button class="ab-btn" data-sort="n" data-dir="desc">概念数↓</button>
             </div>
           </div>
           <div class="audit-table-wrap">
             <table class="audit-table" id="audit-work-table">
-              <thead><tr><th>世界观</th><th>技术数</th><th>平均质量</th><th>完成度</th><th>自评</th></tr></thead>
+              <thead><tr><th>世界观</th><th>概念数</th><th>平均质量</th><th>完成度</th><th>自评</th></tr></thead>
               <tbody>${workRowsHtml}</tbody>
             </table>
           </div>
@@ -264,7 +264,7 @@ const AuditView = {
 
         <section class="audit-block">
           <div class="ab-head">
-            <h2>技术质量自评</h2>
+            <h2>概念质量自评</h2>
             <div class="ab-filter">
               <span>筛选：</span>
               <button class="ab-btn active" data-filter="all">全部</button>
@@ -275,11 +275,11 @@ const AuditView = {
           </div>
           <div class="audit-table-wrap">
             <table class="audit-table" id="audit-tech-table">
-              <thead><tr><th>技术</th><th>所属世界观</th><th>完整度</th><th>自检诊断</th></tr></thead>
+              <thead><tr><th>概念</th><th>所属世界观</th><th>完整度</th><th>自检诊断</th></tr></thead>
               <tbody>${techRowsHtml}</tbody>
             </table>
           </div>
-          <p class="muted note">诊断说明：系统按字段丰富度打分——缺失描述/原理分析/实现路径/技术树依赖会被逐一标注，便于定向补写。</p>
+          <p class="muted note">诊断说明：系统按字段丰富度打分——缺失描述/原理分析/实现路径/概念树依赖会被逐一标注，便于定向补写。</p>
         </section>
       </section>`;
   },
@@ -299,7 +299,7 @@ const AuditView = {
     try { localStorage.setItem(this._doneKey(), JSON.stringify([...set])); } catch (e) {}
   },
 
-  // 待补写清单：自评未达「优秀」（score<75，即非优秀）的技术，按分数升序（最待补在前）
+  // 待补写清单：自评未达「优秀」（score<75，即非优秀）的概念，按分数升序（最待补在前）
   _todoData(d) {
     return d.techRows.filter(r => r.score < 75).sort((a, b) => a.score - b.score);
   },
@@ -352,7 +352,7 @@ const AuditView = {
         });
       });
     }
-    // 技术表筛选
+    // 概念表筛选
     const tTable = document.getElementById("audit-tech-table");
     const tBody = tTable && tTable.querySelector("tbody");
     if (tBody) {

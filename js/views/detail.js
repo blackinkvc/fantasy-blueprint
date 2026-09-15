@@ -35,11 +35,11 @@ const DetailView = {
     const deps = (t.dependencies || []).map(did => {
       const d = TECHS.find(x => x.id === did);
       return d ? `<a class="dep-link" href="#/tech/${d.id}">${d.name}</a>` : `<span class="dep-link dead">${did}</span>`;
-    }).join(" ") || '<span class="muted">无前置依赖（源头技术）</span>';
+    }).join(" ") || '<span class="muted">无前置依赖（源头概念）</span>';
 
     // 被依赖（谁需要本造物）
     const dependents = TECHS.filter(x => (x.dependencies || []).includes(t.id))
-      .map(d => `<a class="dep-link" href="#/tech/${d.id}">${d.name}</a>`).join(" ") || '<span class="muted">暂无下游技术</span>';
+      .map(d => `<a class="dep-link" href="#/tech/${d.id}">${d.name}</a>`).join(" ") || '<span class="muted">暂无下游概念</span>';
 
     // 相关条目
     const related = TECHS.filter(x => x.id !== t.id && (x.workId === t.workId || x.domain === t.domain))

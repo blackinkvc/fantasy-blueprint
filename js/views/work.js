@@ -75,7 +75,7 @@ const WorkView = {
     const techChainHtml = `
       <section class="block">
         <h2>造物演进逻辑链</h2>
-        <p class="muted note">以依赖关系还原该世界观的技术演进因果：实线指向下游造物，表示「先有前者，方有后者」；灰色虚框为来自其他世界观的外部前提。</p>
+        <p class="muted note">以依赖关系还原该世界观的概念演进因果：实线指向下游造物，表示「先有前者，方有后者」；灰色虚框为来自其他世界观的外部前提。</p>
         ${renderTechChain(w.id)}
       </section>`;
 
@@ -145,7 +145,7 @@ const WorkView = {
 function renderTechChain(workId) {
   const ownTechs = TECHS.filter(t => t.workId === workId);
   if (!ownTechs.length) {
-    return `<p class="muted note">本卷为登记条目，造物条目尚在补充，暂无法绘制技术演进逻辑链。</p>`;
+    return `<p class="muted note">本卷为登记条目，造物条目尚在补充，暂无法绘制概念演进逻辑链。</p>`;
   }
 
   // 收集节点：本世界观造物 + 跨作品的外部前提

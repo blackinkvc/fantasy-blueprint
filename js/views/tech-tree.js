@@ -49,7 +49,7 @@ const TechTreeView = {
     return `
       <section class="page-title">
         <h1>造物树</h1>
-        <p>依赖图按「连通分量」拆成若干棵小树：彼此无依赖关系的技术各成一支，有依赖者向左溯源、向右展开。</p>
+        <p>依赖图按「连通分量」拆成若干棵小树：彼此无依赖关系的概念各成一支，有依赖者向左溯源、向右展开。</p>
       </section>
 
       <section class="tree-controls">
