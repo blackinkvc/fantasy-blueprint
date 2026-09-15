@@ -11086,6 +11086,282 @@ const TECHS = [
     dependencies: [], tags: []
   },
   {
+    id: "dr2-council",
+    name: "圣白议会（White Council）",
+    aliases: ["White Council","白议会","高阶议会"],
+    workId: "dresden",
+    domain: "realm",
+    summary: "统辖世俗巫师的最高自治组织，由元老议会（Senior Council）与主事者「梅林」领导，负责制定并维护魔法七律。",
+    description: "圣白议会是《德累斯顿档案》中人类巫师的最高治理机构，成员为具备足够实力的巫师。最高决策层为元老议会，常设领袖称「梅林」（现任即传说中的初代梅林）。议会通过「七律」约束所有巫师，并授权卫兵（Wardens）追猎违反者（术士/warlock），违者多被处死。其存在类比现实中的职业自治团体与司法监管体系。",
+    firstPrinciples: [
+      { principle: "以自治组织统辖从业者并立规执法", verdict: "achieved", note: "作为治理/监管组织，现实有行会、法学会等类比" },
+      { principle: "以魔法本身统辖现实", verdict: "violated", note: "魔法不存在，组织所规制的力量无现实对应" }
+    ],
+    implementation: { current: "作为自律与监管组织，现实已有对应（如行业公会、司法体系）。", path:["现实参考：以行会/学会的自我监管类比。","理论可行性：组织机制成立。"], blockers: [] },
+    dependencies: ["dr2-seven-laws","dr2-wardens"], tags:["组织","白议会"]
+  },
+  {
+    id: "dr2-seven-laws",
+    name: "魔法七律（Seven Laws of Magic）",
+    aliases: ["Seven Laws","七条戒律"],
+    workId: "dresden",
+    domain: "lore",
+    summary: "圣白议会用以约束巫师的七条根本戒律：禁杀人、改体、读心、魅惑、死灵、时间旅行与窥隐；违者定为术士并处死。",
+    description: "魔法七律是全书魔法伦理与政治冲突的核心框架，共七条：（一）不得以魔法杀人；（二）不得改造他人躯体（如制造狼人）；（三）不得侵入他人心智；（四）不得魅惑操控他人；（五）不得涉足生死边界（死灵术）；（六）不得溯游「末河」（时间旅行）；（七）不得窥探或泄露隐秘。卫兵负责侦查与审判，定罪者通常死刑；唯黑杖持有者可免于七律约束。",
+    firstPrinciples: [
+      { principle: "以成文戒律约束施法者行为", verdict: "achieved", note: "作为自律/监管法规，现实有职业伦理与法律类比" },
+      { principle: "被禁之力（杀人/读心/时间旅行等）以魔法实现", verdict: "violated", note: "魔法不存在，所禁之力无现实对应" }
+    ],
+    implementation: { current: "作为监管规范的概念现实已有对应（职业伦理、法律约束）。", path:["现实参考：以行业规范类比其监管逻辑。","理论可行性：规范本身成立。"], blockers: [] },
+    dependencies: ["dr2-council","dr2-wardens","dr2-blackstaff"], tags:["律法","伦理"]
+  },
+  {
+    id: "dr2-wardens",
+    name: "议会卫兵（Wardens）",
+    aliases: ["Warden","灰袍卫兵"],
+    workId: "dresden",
+    domain: "realm",
+    summary: "圣白议会的执法武装，穿灰袍、持法杖与魔杖，负责追猎并处决违反七律的术士。",
+    description: "卫兵是白议会的执法分支，由「卫兵队长」（Captain of the Wardens，如 Anastasia Luccio）统领。他们习于战斗魔法，配备法杖（staff）与魔杖（rod/wand，受议会管制），对术士（违反七律者）拥有侦查、逮捕乃至即时处决权。其职能类比现实中的武装警察/宪兵，但在设定中拥有超自然的追踪与战斗手段。",
+    firstPrinciples: [
+      { principle: "以专职武装执法追猎违规者", verdict: "achieved", note: "作为执法力量，现实有警察/宪兵类比" },
+      { principle: "以魔法追踪与处决", verdict: "violated", note: "魔法追踪/战斗手段无现实对应" }
+    ],
+    implementation: { current: "作为执法组织现实已有对应（武装警察、宪兵）。", path:["现实参考：以执法力量类比其职能。","理论可行性：组织职能成立。"], blockers: [] },
+    dependencies: ["dr2-council","dr2-seven-laws"], tags:["执法","白议会"]
+  },
+  {
+    id: "dr2-blackstaff",
+    name: "黑杖（Blackstaff）",
+    aliases: ["黑杖使","Blackstaff"],
+    workId: "dresden",
+    domain: "lore",
+    summary: "议会秘密任命、可豁免七律的「暗棋」：以黑杖为法器，获授权在必要时以任何手段（含违律魔法）清除威胁。",
+    description: "黑杖是白议会最后的非常手段——一位被秘密授予豁免权的巫师，可不经审判、不受七律限制地使用包括黑魔法在内的任何手段，作为议会的「湿活」（wetwork）执行人与反制单位。现任黑杖为埃比尼泽·麦考伊（Ebenezar McCoy，亦为哈利的导师）。其设定类比现实中的国家授权 covert 行动者。",
+    firstPrinciples: [
+      { principle: "以授权豁免者执行非常规清除", verdict: "achieved", note: "作为被授权之 covert 执行者，现实有国家特工类比" },
+      { principle: "以违律魔法作为常规手段", verdict: "violated", note: "魔法不存在，豁免所依之力无现实对应" }
+    ],
+    implementation: { current: "作为被授权之 covert 执行者，现实已有对应（国家授权的隐蔽行动人员）。", path:["现实参考：以国家授权特工类比其定位。","理论可行性：授权机制成立。"], blockers: [] },
+    dependencies: ["dr2-council","dr2-seven-laws"], tags:["特工","白议会"]
+  },
+  {
+    id: "dr2-swords",
+    name: "十字圣剑（Swords of the Cross）",
+    aliases: ["Swords of the Cross","三圣钉之剑"],
+    workId: "dresden",
+    domain: "artifact",
+    summary: "以基督受难三枚圣钉锻造的三柄圣剑，分别象征信、望、爱，内居天使，对邪恶存在具圣力灼烧。",
+    description: "三剑同由耶稣受难十字架的三枚铁钉打造，对应《哥林多前书》三大德行：爱之剑 Amoracchius（即 Excalibur，欧式阔剑，曾由 Michael Carpenter 执掌，退役后由哈利保管）、信之剑 Fidelacchius（即 Kusanagi，日本刀，Shiro Yoshimo→Murphy→Waldo Butters，后化为光剑形态）、望之剑 Esperacchius（即 Durendal，骑兵弯刀，由 Sanya 执掌）。每剑内居一位天使，圣力可灼烧吸血鬼、恶魔与堕落天使；若持剑者以违背其德行（信/望/爱）的方式用剑，圣力护持即破，剑可被毁。",
+    firstPrinciples: [
+      { principle: "以圣钉锻造、内居天使的圣剑灼烧邪恶", verdict: "violated", note: "圣力与天使寄居无现实对应" },
+      { principle: "以象征德行之名分约束持剑者", verdict: "achieved", note: "作为象征性约束机制，现实有誓约/信条类比" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反守恒/因果等基本法则"] },
+    dependencies: ["dr2-knights"], tags:["圣物","天使"]
+  },
+  {
+    id: "dr2-knights",
+    name: "十字骑士（Knights of the Cross）",
+    aliases: ["Knights of the Cross","持剑者"],
+    workId: "dresden",
+    domain: "realm",
+    summary: "被选中执掌三圣剑、以护弱抗恶为旨的凡人骑士团，至多三人，流动率高。",
+    description: "十字骑士并非必须信仰基督教，只需具足够内在力量、信「弱者当护、恶者当抗」。同一时期至多三位，且多数仅于一桩使命期间持剑，turnover 极高。系列开篇的三位资深骑士分别为 Michael Carpenter（爱之剑）、Shiro Yoshimo（信之剑）与 Sanya（望之剑，曾为堕落天使宿主、后为无神论者）；后期 Waldo Butters 接任信之剑。骑士多被暗示为古王后裔（Michael 为查理曼、Sanya 为萨拉丁、Shiro 为琉球末代王族）。",
+    firstPrinciples: [
+      { principle: "以被选中者执圣剑护弱抗恶", verdict: "achieved", note: "作为志愿守护者团体，现实有骑士团/义勇组织类比" },
+      { principle: "以圣剑赐予超自然战力", verdict: "violated", note: "圣剑之力无现实对应" }
+    ],
+    implementation: { current: "作为志愿守护者组织，现实已有对应（骑士团、护卫志愿组织）。", path:["现实参考：以护卫组织类比其职能。","理论可行性：组织形态成立。"], blockers: [] },
+    dependencies: ["dr2-swords"], tags:["组织","圣战"]
+  },
+  {
+    id: "dr2-vampire-courts",
+    name: "吸血鬼四庭（Vampire Courts）",
+    aliases: ["Red/White/Black/Jade Court","红白黑玉四庭"],
+    workId: "dresden",
+    domain: "beast",
+    summary: "四种互不相干的吸血鬼族群：赤庭（嗜血蝠魔）、白庭（情绪吸取的魅魔）、黑庭（斯托克式尸鬼）、玉庭（东方息吸，几无着墨）。",
+    description: "书中吸血鬼分属四个互不相关的「庭」：赤庭（Red Court）为寄生人皮下的蝠形恶魔，以血为食、唾液具成瘾麻醉性，几乎于《Changes》被哈利以血裔诅咒灭族；白庭（White Court）为魅魔/Incubus，遗传而来、以情欲与生命能为食；黑庭（Black Court）即斯托克笔下的德拉库拉式尸鬼，畏日火木桩，《德古拉》实为揭露之作，几近灭绝；玉庭（Jade Court）仅提及存在于亚洲、以气息/气为食，设定极少。四庭首次出现于《Storm Front》。",
+    firstPrinciples: [
+      { principle: "以超自然手段吸血/吸能长生", verdict: "violated", note: "超自然吸食与长生无现实对应" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反生物/能量守恒等基本法则"] },
+    dependencies: ["dr2-white-court"], tags:["异种","吸血鬼"]
+  },
+  {
+    id: "dr2-white-court",
+    name: "白庭家族（White Court Houses）",
+    aliases: ["White Court","Raith/Malvora/Skavis"],
+    workId: "dresden",
+    domain: "beast",
+    summary: "最似人的吸血鬼庭，分以所食情绪立家的三大家族：Raith 食欲、Malvora 食惧、Skavis 食绝望；唯「真爱」可灼其身。",
+    description: "白庭吸血鬼外表与人无异、为遗传觉醒（非转化），体内具称「饥渴（Hunger）」的恶魔本质，以情欲与生命能为食；久不进食则陷入狂乱。分多家族，以所食情绪区分：Raith 食 lust（性捕食，Thomas Raith 为哈利同母异父弟，其姐 Lara 实际掌庭、父 Lord Raith 仅为名义之王）、Malvora 食 fear、Skavis 食 despair（常逼人自尽）。其最大弱点是所食情绪之反面——如 Raith 惧于「真爱」，真爱者接触可灼其皮。日阳光与圣物对其无害。",
+    firstPrinciples: [
+      { principle: "以遗传觉醒的恶魔本质吸取情欲生命能", verdict: "violated", note: "情欲转能量、遗传恶魔本质无现实对应" },
+      { principle: "以情绪之反面对抗捕食者", verdict: "achieved", note: "作为心理/情感抗性隐喻，现实可类比" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反生物/能量守恒等基本法则"] },
+    dependencies: ["dr2-vampire-courts"], tags:["异种","吸血鬼"]
+  },
+  {
+    id: "dr2-faerie-courts",
+    name: "仙灵双庭（Summer & Winter Courts）",
+    aliases: ["Seelie/Unseelie","夏庭/冬庭"],
+    workId: "dresden",
+    domain: "beast",
+    summary: "统治 Nevernever 的两大仙灵王室：夏庭（Titania 主生生长）与冬庭（Mab 主死寒寂），以维持平衡为要，冬庭镇守外界之门。",
+    description: "仙灵分为夏庭（Seelie，女王 Titania、母后 Mother Summer、夏之女 Aurora→Lily→Sarissa）与冬庭（Unseelie，女王 Mab、母后 Mother Winter、冬之女 Maeve→Molly Carpenter）。两庭对立但须维持平衡——夏主生长、冬主 death 与寒寂；若夏胜则病害疯长。冬庭之责为于「外界之门（Outer Gates）」抵御外者（Outsiders）。各庭设凡人冠军（夏之骑士 Ronald Reuel→Fix；冬之骑士 Lloyd Slate→哈利）。Leanansidhe 为哈利的仙灵教母、冬庭权贵。",
+    firstPrinciples: [
+      { principle: "以仙灵王室统治并行灵界并镇守 reality 边界", verdict: "violated", note: "仙灵王室与灵界无现实对应" },
+      { principle: "以维持对立平衡维系秩序", verdict: "achieved", note: "作为平衡/制衡隐喻，现实可类比" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反因果/生物尺度等基本法则"] },
+    dependencies: ["dr2-nevernever","dr2-outsiders","dr2-leanansidhe","dr2-winter-knight"], tags:["仙灵","灵界"]
+  },
+  {
+    id: "dr2-leanansidhe",
+    name: "莉南西迪（Leanansidhe）",
+    aliases: ["Lea","仙灵教母"],
+    workId: "dresden",
+    domain: "beast",
+    summary: "哈利的仙灵教母，隶属冬庭、为 Mab 的侍女；以「人情（欠她的债）」交易赐福，后被外者感染又治愈。",
+    description: "Leanansidhe（昵称 Lea）是哈利·德累斯顿的仙灵教母（faerie godmother），属冬庭、为冬之女王 Mab 的 handmaiden。她以「欠她一次人情」为代价赐予哈利助力与知识，是典型的交易型仙灵。后期揭露她曾被赤庭赠予的魔法匕首所携带的「adversary（Nemesis）」感染，牵连冬之女 Maeve，后被 Mab 治愈。",
+    firstPrinciples: [
+      { principle: "以人情债交易赐福的仙灵教母", verdict: "violated", note: "仙灵契约与灵界无现实对应" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反因果/生物尺度等基本法则"] },
+    dependencies: ["dr2-faerie-courts"], tags:["仙灵","教母"]
+  },
+  {
+    id: "dr2-nevernever",
+    name: "永不对（The Nevernever）",
+    aliases: ["Faerie","灵界","异境"],
+    workId: "dresden",
+    domain: "realm",
+    summary: "与人类世界并存的庞大灵界，仙灵、怪物与「道（Ways）」穿梭其间，是全书魔法地理的基底。",
+    description: "Nevernever 是与物质世界重叠或相邻的灵性维度，仙灵、怪物与各种超自然存在栖居其中，巫师可经「道（Ways/portal）」穿行。它是夏/冬双庭的疆域，也是多数魔法生物的根源之地。其结构广袤、层级复杂，常随意念与契约改变，是全书魔法体系的空间基底。",
+    firstPrinciples: [
+      { principle: "以并行灵界承载魔法存在与穿梭", verdict: "violated", note: "并行灵界与穿行无现实对应" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反空间/因果等基本法则"] },
+    dependencies: ["dr2-faerie-courts"], tags:["灵界","空间"]
+  },
+  {
+    id: "dr2-outsiders",
+    name: "外者（Outsiders）",
+    aliases: ["Outer Gates","Walkers","Nemesis"],
+    workId: "dresden",
+    domain: "lore",
+    summary: "来自外界之门外的不可名状存在（如 He Who Walks Before/Behind/Within），企图侵入现实；冬庭镇守其门，星裔可感知之。",
+    description: "外者（Outsiders）是源于「外界之门（Outer Gates）」之外的存在，本质不可名状、意图侵蚀现实。冬庭的职责即于门外抵御它们；其中「行走者（Walkers）」如 He Who Walks Before/Behind/Within 为代表性威胁。一种称「Nemesis」的感染可腐化仙灵与巫师（曾染 Maeve、Lea），使之为外者效力。星裔（Starborn，如哈利）天生可感知并对抗外者。",
+    firstPrinciples: [
+      { principle: "以门外界存在侵蚀现实、需被镇守", verdict: "violated", note: "门外不可名状存在无现实对应" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反因果/生物尺度等基本法则"] },
+    dependencies: ["dr2-faerie-courts","dr2-winter-knight","dr2-starborn"], tags:["外神","威胁"]
+  },
+  {
+    id: "dr2-denarius",
+    name: "黑币团（Order of the Blackened Denarius）",
+    aliases: ["Blackened Denarius","三十银币","Nicodemus"],
+    workId: "dresden",
+    domain: "lore",
+    summary: "三十枚犹大银币各寄一堕落天使，缔结者获力却受腐蚀；首领 Nicodemus Archleone 寄居 Anduriel，为哈利宿敌。",
+    description: "黑币团源自犹大出卖耶稣所得的三十枚银币，每枚寄居一位堕落天使（denarian）。凡人以肌肤触碰并接纳银币，即得超凡之力却逐渐被腐蚀；拒绝则只获短暂赋能。首领 Nicodemus Archleone 为最古老强大者，寄居堕落天使 Anduriel，多次与哈利为敌；Sanya 曾为其宿主后挣脱。哈利屡被诱以持币，终拒之。",
+    firstPrinciples: [
+      { principle: "以契约银币寄居堕落天使赐力腐蚀", verdict: "violated", note: "天使寄居与契约腐蚀无现实对应" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反因果/生物尺度等基本法则"] },
+    dependencies: [], tags:["堕落","宿敌"]
+  },
+  {
+    id: "dr2-winter-knight",
+    name: "冬之骑士（Winter Knight）",
+    aliases: ["Winter Knight's Mantle","冬骑士披风"],
+    workId: "dresden",
+    domain: "lore",
+    summary: "冬庭的凡人冠军，披风（Mantle）之力来自 Mab；Lloyd Slate 之后由哈利·德累斯顿于《Changes》接任。",
+    description: "冬之骑士是冬庭的凡人 champion，其力量来自女王 Mab 授予的「披风（Mantle）」——赋予远超常人的力量、速度与恢复力，却也放大 predatory 本性。Lloyd Slate 长期任此职，于《Changes》被杀后，哈利为救女儿 Maggie 与 Mab 立约，接下冬骑士披风。披风随「冬律（Winter Law）」运作，违之则被剥夺。",
+    firstPrinciples: [
+      { principle: "以女王授予的披风赋予凡人超凡战力", verdict: "violated", note: "披风赋能无现实对应" },
+      { principle: "以契约立约换力并受限", verdict: "achieved", note: "作为契约交换隐喻，现实可类比" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反生物/能量尺度等基本法则"] },
+    dependencies: ["dr2-faerie-courts"], tags:["披风","骑士"]
+  },
+  {
+    id: "dr2-soulfire",
+    name: "魂火（Soulfire）",
+    aliases: ["Soulfire","圣白创火"],
+    workId: "dresden",
+    domain: "lore",
+    summary: "与地狱火相对的纯白创造性能量，由天使（如 Uriel）赐予；可灼净腐败、强化法术，却消耗施者自身。",
+    description: "魂火是地狱火（Hellfire）的对立面——一种纯白、具创造性的神圣能量。哈利在受天使（大天使 Uriel）触碰后得以驾驭。它以「纯洁意志与创造」为燃料，可净化 corruption、灼烧邪恶，并大幅提升所施法术的威力，但每次使用都消耗施术者自身。其本质呼应「灵魂火」旧条目，但此处强调其神圣创造属性与代价。",
+    firstPrinciples: [
+      { principle: "以天使赐予的纯白创造能量灼净腐败", verdict: "violated", note: "神圣创造能量无现实对应" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反能量守恒等基本法则"] },
+    dependencies: [], tags:["圣能","创造"]
+  },
+  {
+    id: "dr2-demonreach",
+    name: "恶魔礁（Demonreach）",
+    aliases: ["Demonreach Island","湖中监狱岛"],
+    workId: "dresden",
+    domain: "realm",
+    summary: "密歇根湖中的孤岛，实为关押最危险存在的巨型超自然监狱；哈利于《Turn Coat》后受绑为其「狱长」。",
+    description: "恶魔礁是芝加哥近郊密歇根湖上的一座岛，外表平常，实为封印与关押最具危险超自然存在的庞大监狱，岛心矗立高塔。哈利在《Turn Coat》事件后被岛本身「选中」并绑定为 Warden（狱长），可藉此调用岛的封印力量。它亦是多场决战（如抵御外者、Mab 现身）的关键地点。",
+    firstPrinciples: [
+      { principle: "以灵岛为狱封印危险存在并由人掌钥", verdict: "violated", note: "灵岛封印与绑定无现实对应" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反因果/空间等基本法则"] },
+    dependencies: ["dr2-outsiders"], tags:["监狱","灵地"]
+  },
+  {
+    id: "dr2-bob",
+    name: "鲍勃（Bob the Skull）",
+    aliases: ["Bob","颅中灵"],
+    workId: "dresden",
+    domain: "lore",
+    summary: "寄居于骷髅中的「智灵」，渊博的超自然知识库，可附身、运算；为哈利自导师 DuMorne 处继承。",
+    description: "鲍勃是禁锢于一枚骷髅中的「智灵（spirit of intellect）」，是哈利最信赖的知识来源，通晓魔法、怪物与咒术。它可脱离骷髅附身他物、代为运算与侦查，性格话痨而实用。哈利自其前导师 Justin DuMorne（后证为黑巫师）处继承此骷髅。",
+    firstPrinciples: [
+      { principle: "以颅中智灵承载知识并可附身运算", verdict: "violated", note: "寄居智灵无现实对应" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反意识/因果等基本法则"] },
+    dependencies: [], tags:["智灵","知识"]
+  },
+  {
+    id: "dr2-alphas",
+    name: "阿尔法狼群（The Alphas）",
+    aliases: ["Alphas","β 狼群"],
+    workId: "dresden",
+    domain: "beast",
+    summary: "以 Billy Borden 为首的大学龄 β 狼人小队，借 Tilly 腰带/护符变形，为哈利的凡人盟友。",
+    description: "阿尔法是一群大学年龄的 β 阶段狼人（beta werewolves），由 Billy Borden 领导，借助 Tilly 制作的变身腰带/护符在狼形与人形间切换，并非天生 full lycanthrope。他们是哈利在芝加哥的凡人（兼超自然）盟友，常于地面行动提供支援。",
+    firstPrinciples: [
+      { principle: "以护符介导的 β 狼人变形同盟", verdict: "violated", note: "狼人变形无现实对应" },
+      { principle: "以志愿小队结盟互助", verdict: "achieved", note: "作为志愿团队，现实可类比" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反生物/遗传等基本法则"] },
+    dependencies: [], tags:["狼人","盟友"]
+  },
+  {
+    id: "dr2-starborn",
+    name: "星裔（Starborn）",
+    aliases: ["Starborn","星诞者"],
+    workId: "dresden",
+    domain: "lore",
+    summary: "于特定星辰「诞生」时降生的巫师，天生可感知并抵抗外者（Outsiders）；哈利即星裔之一。",
+    description: "星裔指在特定星辰现于天空（「星诞」）之时出生的巫师，其灵魂带独特印记，天生能感知、抵抗乃至伤害外界之门外的存在（Outsiders），对此类威胁具天然免疫与克制。哈利·德累斯顿为星裔（其旧识 Elaine 亦为星裔之一）。这一属性使其在抵御外者的斗争中举足轻重。",
+    firstPrinciples: [
+      { principle: "以星辰诞辰赋予对外者的天然感知与抗性", verdict: "violated", note: "星辰赋予抗性无现实对应" }
+    ],
+    implementation: { current: "现实无对应，仅在该世界观设定内成立。", path:["现实参考：以工程近似模拟其形态/功能，而非复现原理。","理论可行性：受基本法则限制，不可行。"], blockers:["违反因果/生物尺度等基本法则"] },
+    dependencies: ["dr2-outsiders"], tags:["天赋","外神克星"]
+  },
+  {
     id: "pr-dragonborn2",
     name: "龙裔公主",
     aliases: [],
