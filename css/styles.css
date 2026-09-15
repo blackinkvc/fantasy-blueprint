@@ -287,6 +287,13 @@ a:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
 .body-text { color: var(--ink); margin: 0; }
 .note { font-size: 13px; margin: -6px 0 12px; color: var(--ink-dim); }
 
+/* 作品档案（故事 / 梗概 / 撰写背景 / 作者） */
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; }
+.meta-cell { border-top: 1px solid var(--line-soft); padding-top: 12px; }
+.meta-cell h3 { font-size: 13px; margin: 0 0 8px; letter-spacing: 2px; color: var(--ink-soft); font-family: var(--font-serif); }
+.meta-cell .body-text { font-size: 14px; line-height: 1.75; }
+@media (max-width: 680px) { .meta-grid { grid-template-columns: 1fr; } }
+
 /* 原理分析表（档案登记表） */
 .fp-table { width: 100%; border-collapse: collapse; border: 1px solid var(--ink); }
 .fp-table th, .fp-table td { padding: 11px 15px; text-align: left; border-bottom: 1px solid var(--line-soft); font-size: 14px; }

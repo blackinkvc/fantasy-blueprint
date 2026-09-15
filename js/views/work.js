@@ -72,6 +72,19 @@ const WorkView = {
         ${relInc.length ? `<p class="rel-line"><span class="rel-dir">本作影响 / 被致敬于</span>${relInc.join("")}</p>` : ""}
       </section>` : "";
 
+    // 作品档案：故事 / 梗概 / 撰写背景 / 作者（来自 WORKS_META）
+    const meta = (typeof WORKS_META !== "undefined" && WORKS_META[w.id]) ? WORKS_META[w.id] : null;
+    const metaHtml = meta ? `
+      <section class="block">
+        <h2>故事 · 梗概 · 撰写背景 · 作者</h2>
+        <div class="meta-grid">
+          <div class="meta-cell"><h3>故事</h3><p class="body-text">${meta.story || "—"}</p></div>
+          <div class="meta-cell"><h3>梗概</h3><p class="body-text">${meta.synopsis || "—"}</p></div>
+          <div class="meta-cell"><h3>撰写背景</h3><p class="body-text">${meta.background || "—"}</p></div>
+          <div class="meta-cell"><h3>作者情况</h3><p class="body-text">${meta.author || "—"}</p></div>
+        </div>
+      </section>` : "";
+
     const techChainHtml = `
       <section class="block">
         <h2>造物演进逻辑链</h2>
@@ -109,6 +122,8 @@ const WorkView = {
             </figure>
           </aside>
         </section>
+
+        ${metaHtml}
 
         ${seriesHtml}
 
