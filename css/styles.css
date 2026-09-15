@@ -755,3 +755,55 @@ svg.scat { overflow-x: auto; }
 .bd-g { background: #6f6a5d; }
 .bd-w { background: #a39d8e; }
 .audit-fig .audit-table-wrap { font-size: 13px; }
+
+/* ---------- 分类分析页（实时筛选） ---------- */
+.cf-panel { border: 1px solid var(--line); background: var(--paper); padding: 20px 20px 8px; margin-top: 6px; }
+.cf-group { padding: 6px 0 14px; border-bottom: 1px dashed var(--line-dash); }
+.cf-group:last-child { border-bottom: none; padding-bottom: 4px; }
+.cf-group-label {
+  font-size: 12px; letter-spacing: 3px; color: var(--ink-soft);
+  font-family: var(--font-serif); margin-bottom: 10px;
+}
+.cf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.cf-chip {
+  flex: 0 1 auto; min-width: 118px; max-width: 184px;
+  display: flex; flex-direction: column; gap: 7px;
+  background: var(--paper-2); border: 1px solid var(--line-soft);
+  color: var(--ink); font-family: var(--font-serif); font-size: 13px;
+  padding: 9px 11px; cursor: pointer; text-align: left;
+  transition: border-color .12s, background .12s, transform .06s;
+}
+.cf-chip:hover { border-color: var(--ink); }
+.cf-chip:active { transform: translateY(1px); }
+.cf-chip.on { background: var(--ink); color: var(--reverse-ink); border-color: var(--ink); }
+.cf-chip-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.cf-chip-label { line-height: 1.4; }
+.cf-chip-n { font-family: var(--font-en); font-size: 13px; opacity: .8; }
+.cf-chip.on .cf-chip-n { opacity: 1; }
+.cf-bar { display: block; height: 4px; background: rgba(0,0,0,.10); }
+.cf-chip.on .cf-bar { background: rgba(244,236,216,.22); }
+.cf-bar i { display: block; height: 100%; background: var(--accent); }
+.cf-chip.on .cf-bar i { background: var(--reverse-ink); }
+
+.cf-summary {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin: 18px 0 6px; padding: 0 2px;
+}
+.cf-match { font-size: 15px; color: var(--ink-soft); }
+.cf-match strong { font-family: var(--font-en); font-size: 18px; color: var(--ink); }
+.cf-filter-text { color: var(--accent); font-size: 13.5px; }
+
+.cf-results { margin-top: 12px; }
+
+/* 世界观档案页的分类标签 */
+.cf-tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+.cf-tag {
+  display: inline-block; font-size: 12.5px; padding: 3px 10px;
+  border: 1px solid var(--line-soft); background: var(--paper-2); color: var(--ink-soft);
+}
+.cf-tag.more { background: var(--ink); color: var(--reverse-ink); border-color: var(--ink); text-decoration: none; }
+.cf-tag.more:hover { background: var(--accent); border-color: var(--accent); }
+
+@media (max-width: 680px) {
+  .cf-chip { min-width: calc(50% - 4px); max-width: none; }
+}

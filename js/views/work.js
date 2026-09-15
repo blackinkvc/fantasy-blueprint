@@ -85,6 +85,26 @@ const WorkView = {
         </div>
       </section>` : "";
 
+    // 分类标签（来自 WORKS_TAGS / TAG_TAXONOMY，可跳转分类分析页交叉检索）
+    const tagsHtml = (function () {
+      const tags = (typeof WORKS_TAGS !== "undefined" && WORKS_TAGS[w.id]) || [];
+      if (!tags.length) return "";
+      const chips = tags.map(t => {
+        let dimLabel = "", label = t;
+        if (typeof TAG_TAXONOMY !== "undefined") {
+          const dim = Object.keys(TAG_TAXONOMY).find(d => TAG_TAXONOMY[d].tags[t]);
+          if (dim) { dimLabel = TAG_TAXONOMY[dim].label; label = TAG_TAXONOMY[dim].tags[t]; }
+        }
+        return `<span class="cf-tag" title="${dimLabel}">${label}</span>`;
+      }).join("");
+      return `
+        <section class="block">
+          <h2>分类标签</h2>
+          <p class="muted note">按 <strong>背景设定 · 时代 · 神话借用度 · 来源媒介 · 文化渊源 · 子类型 · 基调</strong> 七个维度标注。</p>
+          <div class="cf-tag-row">${chips}<a class="cf-tag more" href="#/classify">前往分类分析 →</a></div>
+        </section>`;
+    })();
+
     const techChainHtml = `
       <section class="block">
         <h2>造物演进逻辑链</h2>
@@ -100,6 +120,8 @@ const WorkView = {
           <h1>《${w.title}》</h1>
           <p class="meta">${w.creator} · ${w.media}${w.year ? " · " + w.year + " 年" : ""} · ${w.era}</p>
         </header>
+
+        ${tagsHtml}
 
         <section class="work-split">
           <div class="work-split-main">
