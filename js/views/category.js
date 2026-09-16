@@ -44,7 +44,7 @@ const CategoryView = {
 
       <section class="results-head">
         <span>共 <strong>${list.length}</strong> 项</span>
-        <span class="hint">点击卡片查看详情与实现路径</span>
+        <span class="hint">点击卡片查看设定与依赖脉络</span>
       </section>
 
       <section class="tech-list">${results}</section>
@@ -55,7 +55,7 @@ const CategoryView = {
     const dom = DOMAINS[t.domain];
     const work = WORKS.find(w => w.id === t.workId);
     return `
-      <a class="tech-card" href="#/tech/${t.id}">
+      <a class="tech-card" href="#/tech/${t.id}" data-tech-card="${t.id}">
         <div class="tc-main">
           <div class="tc-title">
             <h3>${t.name}</h3>

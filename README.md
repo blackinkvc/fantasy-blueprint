@@ -1,6 +1,6 @@
 # 奇幻造物实现蓝图 · Blueprint of Fantasy Creation
 
-> 清点奇幻作品中的魔法、异兽与超自然造物：哪些已成现实，哪些仍在炼金术里沉睡，哪些只属于纸上的世界。
+> 清点奇幻作品中的魔法、异兽与超自然造物：一部横跨神话、文学与游戏的造物档案。
 
 🌐 **在线访问（GitHub Pages）：** https://blackinkvc.github.io/fantasy-blueprint/
 
@@ -20,11 +20,10 @@
 ```
 index.html              入口页面
 css/styles.css          样式
-js/data/                数据层（domains / works / techs / relations / davinci / tree-template）
+js/data/                数据层（domains / works / works-tags / techs / relations / tree-template）
 js/views/               视图层（各页面渲染逻辑）
 js/router.js            哈希路由
 js/app.js               应用入口
-assets/images/          图像资源（含 davinci 系列 SVG）
 ```
 
 ## 本地预览

@@ -14,6 +14,7 @@ function esc(s) { return escapeHtml(s); }
   Router.register("/tech/:id", (ctx) => DetailView.render(ctx.params.id));
   Router.register("/tree", () => TechTreeView.render(), () => TechTreeView.mount());
   Router.register("/work/:id", (ctx) => WorkView.render(ctx.params.id));
+  Router.register("/book/:id", (ctx) => BookView.render(ctx.params.id));
   Router.register("/works", (ctx) => WorksView.render(ctx.query));
   Router.register("/relations", () => RelationsView.render(), () => RelationsView.mount());
   Router.register("/audit", () => AuditView.render(), () => AuditView.mount());

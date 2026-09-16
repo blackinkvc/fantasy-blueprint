@@ -100,7 +100,7 @@ const WorkTreeView = (() => {
         const techs = mount[n.id];
         const { body, title } = nodeSvg(x, y, n, lit, techs);
         const clickable = techs && techs.length
-          ? `<a href="#/tech/${techs[0].id}"><title>${title}</title>${body}</a>`
+          ? `<a href="#/tech/${techs[0].id}" data-tech-card="${techs[0].id}"><title>${title}</title>${body}</a>`
           : `<g><title>${title}</title>${body}</g>`;
         s += clickable;
       });
@@ -122,7 +122,7 @@ const WorkTreeView = (() => {
     const sigs = (w.representativeTechs || []).slice(0, SIG_MAX).map(rt => {
       const t = TECHS.find(x => x.id === rt);
       return t
-        ? { name: t.name, href: "#/tech/" + t.id, tip: "点击查看卷宗" }
+        ? { name: t.name, href: "#/tech/" + t.id, id: t.id, tip: "点击查看梗概与详细" }
         : { name: rt, tip: "本世界观登记造物" };
     });
     // 奇点列竖线
@@ -140,7 +140,7 @@ const WorkTreeView = (() => {
           letter-spacing="0.3">★ ${esc(nameClip)}</text>`;
       const title = esc(sg.name + "\n" + sg.tip);
       s += sg.href
-        ? `<a href="${sg.href}"><title>${title}</title>${body}</a>`
+        ? `<a href="${sg.href}" data-tech-card="${sg.id}"><title>${title}</title>${body}</a>`
         : `<g><title>${title}</title>${body}</g>`;
     });
 

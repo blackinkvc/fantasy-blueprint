@@ -1,6 +1,6 @@
 // ============================================================
 // 造物条目详情页视图
-// 头部信息 + 设定 + 原理分析表 + 实现路径时间线 + 依赖关系 + 相关条目
+// 头部信息 + 设定 + 依赖关系 + 相关条目
 // ============================================================
 const DetailView = {
   render(id) {
@@ -10,42 +10,22 @@ const DetailView = {
     const dom = DOMAINS[t.domain];
     const work = WORKS.find(w => w.id === t.workId);
 
-    // 原理分析表
-    const verdictMap = {
-      achieved:   { label: "已实现", color: "#000000", icon: "●" },
-      breakthrough: { label: "需突破", color: "#555555", icon: "▲" },
-      violated:   { label: "违反法则", color: "#000000", icon: "✕" }
-    };
-    const fpRows = t.firstPrinciples.map(fp => {
-      const v = verdictMap[fp.verdict] || verdictMap.breakthrough;
-      return `
-        <tr>
-          <td>${fp.principle}</td>
-          <td><span class="verdict" style="color:${v.color}">${v.icon} ${v.label}</span></td>
-          <td>${fp.note}</td>
-        </tr>`;
-    }).join("");
-
-    // 实现路径时间线
-    const pathItems = t.implementation.path.map((step, i) =>
-      `<li class="tl-item"><span class="tl-num">${i + 1}</span><span class="tl-text">${step}</span></li>`
-    ).join("");
-
     // 依赖前置
     const deps = (t.dependencies || []).map(did => {
       const d = TECHS.find(x => x.id === did);
-      return d ? `<a class="dep-link" href="#/tech/${d.id}">${d.name}</a>` : `<span class="dep-link dead">${did}</span>`;
+      return d ? `<a class="dep-link" href="#/tech/${d.id}" data-tech-card="${d.id}">${d.name}</a>` : `<span class="dep-link dead">${did}</span>`;
     }).join(" ") || '<span class="muted">无前置依赖（源头概念）</span>';
 
     // 被依赖（谁需要本造物）
     const dependents = TECHS.filter(x => (x.dependencies || []).includes(t.id))
-      .map(d => `<a class="dep-link" href="#/tech/${d.id}">${d.name}</a>`).join(" ") || '<span class="muted">暂无下游概念</span>';
+      .map(d => `<a class="dep-link" href="#/tech/${d.id}" data-tech-card="${d.id}">${d.name}</a>`).join(" ") || '<span class="muted">暂无下游概念</span>';
 
-    // 相关条目
-    const related = TECHS.filter(x => x.id !== t.id && (x.workId === t.workId || x.domain === t.domain))
-      .slice(0, 6).map(x =>
-        `<a class="chip-link" href="#/tech/${x.id}">${x.name}</a>`
-      ).join("");
+    // 相关条目：同世界观优先，其次同领域
+    const sameWork = TECHS.filter(x => x.id !== t.id && x.workId === t.workId);
+    const sameDomain = TECHS.filter(x => x.id !== t.id && x.workId !== t.workId && x.domain === t.domain);
+    const related = sameWork.concat(sameDomain).slice(0, 8).map(x =>
+      `<a class="chip-link" href="#/tech/${x.id}" data-tech-card="${x.id}">${x.name}</a>`
+    ).join("");
 
     return `
       <article class="detail">
@@ -65,30 +45,10 @@ const DetailView = {
           </div>
         </header>
 
-        <figure class="davinci-plate">
-          <img src="${DaVinciImg.forTech(t)}" alt="${t.name} 古卷铭图">
-          <figcaption>铭图 · 古卷手稿 · ${dom.label}领域造物示意</figcaption>
-        </figure>
-
         <section class="block">
           <h2>作品内设定</h2>
           <p class="body-text">${t.description}</p>
-        </section>
-
-        <section class="block">
-          <h2>原理分析</h2>
-          <p class="muted note">逐条核对底层自然法则，判断该造物是符合、需要突破、还是违反已知法则。</p>
-          <table class="fp-table">
-            <thead><tr><th>原理 / 机制</th><th>判定</th><th>说明</th></tr></thead>
-            <tbody>${fpRows}</tbody>
-          </table>
-        </section>
-
-        <section class="block">
-          <h2>实现路径</h2>
-          <p class="body-text">现状：${t.implementation.current}</p>
-          <ul class="timeline">${pathItems}</ul>
-          ${t.implementation.blockers.length ? `<div class="blockers"><strong>关键瓶颈：</strong>${t.implementation.blockers.map(b => `<span class="tag danger">${b}</span>`).join(" ")}</div>` : ""}
+          ${t.tags.length ? `<div class="chips-wrap" style="margin-top:14px">${t.tags.map(x => `<span class="tag">${x}</span>`).join("")}</div>` : ""}
         </section>
 
         <section class="block deps">

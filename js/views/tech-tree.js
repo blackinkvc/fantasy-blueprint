@@ -231,7 +231,7 @@ const TechTreeView = {
         tip.style.top = (e.clientY - r.top + 16) + "px";
       });
       g.addEventListener("mouseleave", () => { tip.style.display = "none"; });
-      g.addEventListener("click", () => { location.hash = "#/tech/" + id; });
+      g.addEventListener("click", () => { TechCard.open(id); });
     });
 
     container._transform = { scale: 1, tx: 0, ty: 0 };

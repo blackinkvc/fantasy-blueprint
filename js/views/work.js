@@ -20,7 +20,7 @@ const WorkView = {
           </div>
           <div class="lv-group-items">
             ${items.map(t => `
-              <a class="lv-item" href="#/tech/${t.id}">
+              <a class="lv-item" href="#/tech/${t.id}" data-tech-card="${t.id}">
                 <strong>${t.name}</strong>
                 <span class="muted">${t.summary}</span>
                 <span class="dom-pill" style="--dcolor:${d.color}">${d.icon}${d.label}</span>
@@ -33,25 +33,59 @@ const WorkView = {
     const divergences = w.physicalDivergences.map(d =>
       `<li class="div-item">${d}</li>`).join("");
 
+    // 定位行：是否以地球为背景 / 时代 / 借鉴了哪些神话
+    const locateHtml = (function () {
+      const tags = (typeof WORKS_TAGS !== "undefined" && WORKS_TAGS[w.id]) || [];
+      const pick = (dim) => {
+        if (typeof TAG_TAXONOMY === "undefined" || !TAG_TAXONOMY[dim]) return "";
+        const hit = tags.find(t => TAG_TAXONOMY[dim].tags[t]);
+        return hit ? TAG_TAXONOMY[dim].tags[hit] : "";
+      };
+      const row = (k, v) => (v ? `<span class="locate-item"><b>${k}</b>${v}</span>` : "");
+      const body =
+        row("背景", pick("background")) +
+        row("时代", pick("era")) +
+        row("神话渊源", (w.mythSources || []).join(" · "));
+      return body ? `<div class="locate">${body}</div>` : "";
+    })();
+
     // 代表造物：若与造物库条目 id 对应则作链接，否则为登记名词标签
     const repTechs = (w.representativeTechs || []).map(rt => {
       const t = TECHS.find(x => x.id === rt);
       return t
-        ? `<a class="chip-link" href="#/tech/${t.id}">${t.name}</a>`
+        ? `<a class="chip-link" href="#/tech/${t.id}" data-tech-card="${t.id}">${t.name}</a>`
         : `<span class="tag">${rt}</span>`;
     }).join(" ");
 
     const deepCount = TECHS.filter(t => t.workId === w.id).length;
 
-    // 系列构成（同系列多部作品聚合呈现）
-    const seriesHtml = w.series ? `
+    // 系列构成：有分册数据则逐册列出且可点入，否则退回文字清单
+    const seriesHtml = (function () {
+      if (!w.series) return "";
+      const books = (typeof SERIES_BOOKS !== "undefined" && SERIES_BOOKS[w.id]) || [];
+      if (books.length) {
+        const cards = books.map((b, i) => `
+          <a class="book-chip" href="#/book/${b.id}">
+            <span class="bk-idx">${String(i + 1).padStart(2, "0")}</span>
+            <span class="bk-name">${esc(b.cn || b.en)}</span>
+            <span class="bk-year">${b.year}</span>
+          </a>`).join("");
+        return `
+        <section class="block">
+          <h2>系列构成（${books.length} 部）</h2>
+          <p class="muted note">本条目以「${esc(w.series.name)}」系列整体收录。下列各册均可点入，查看该册的故事与梗概。</p>
+          <div class="book-row">${cards}</div>
+        </section>`;
+      }
+      return `
       <section class="block">
         <h2>系列构成</h2>
-        <p class="muted note">本条目以「${w.series.name}」系列整体收录，同一系列的多部作品归于一卷。</p>
+        <p class="muted note">本条目以「${esc(w.series.name)}」系列整体收录，同一系列的多部作品归于一卷。</p>
         <ul class="series-list">
-          ${w.series.members.map(m => `<li>${m}</li>`).join("")}
+          ${w.series.members.map(m => `<li>${esc(m)}</li>`).join("")}
         </ul>
-      </section>` : "";
+      </section>`;
+    })();
 
     // 影响与致敬（双向检索关系网）
     const rel = getRelations(w.id);
@@ -123,26 +157,15 @@ const WorkView = {
 
         ${tagsHtml}
 
-        <section class="work-split">
-          <div class="work-split-main">
-            <section class="block">
-              <h2>世界观设定</h2>
-              <p class="body-text">${w.setting}</p>
-            </section>
+        <section class="block">
+          <h2>世界观设定</h2>
+          <p class="body-text">${w.setting}</p>
+          ${locateHtml}
+        </section>
 
-            <section class="block">
-              <h2>法则偏离点</h2>
-              <p class="muted note">该世界观中与现实法则明显偏离的设定，是判断其造物"只能在世界观内实现"的依据。</p>
-              <ul class="div-list">${divergences}</ul>
-            </section>
-          </div>
-
-          <aside class="work-split-aside">
-            <figure class="davinci-plate">
-              <img src="${DaVinciImg.forWork(w.id)}" alt="《${w.title}》古卷铭图">
-              <figcaption>铭图 · 古卷手稿 · 与《${w.title}》的主导造物分支相应</figcaption>
-            </figure>
-          </aside>
+        <section class="block">
+          <h2>法则偏离点</h2>
+          <ul class="div-list">${divergences}</ul>
         </section>
 
         ${metaHtml}
@@ -163,7 +186,7 @@ const WorkView = {
           <h2>本世界观造物（${deepCount} 项）</h2>
           ${grouped || (`
             <div class="chips-wrap">${repTechs}</div>
-            <p class="muted note" style="margin-top:12px">本卷为登记条目：已登记代表造物如上。原理逐条分析、实现路径与依赖链，优先覆盖已有深度条目的核心卷宗，其余将陆续展开。</p>
+            <p class="muted note" style="margin-top:12px">本卷为登记条目：已登记代表造物如上。设定说明与依赖链，优先覆盖已有深度条目的核心卷宗，其余将陆续展开。</p>
             <a class="btn ghost" href="#/category">浏览已有深度条目 →</a>
           `)}
         </section>
@@ -274,7 +297,7 @@ function renderTechChain(workId) {
         : (dom ? `<text x="${x + 13}" y="${y + NODE_H - 10}" font-size="8" fill="#bdb5a8">${esc(dom.icon)} ${esc(clip(dom.label, 4))}</text>` : "")}`;
     nodeSvg += ext
       ? `<g><title>${title}</title>${body}</g>`
-      : `<a href="#/tech/${id}"><title>${title}</title>${body}</a>`;
+      : `<a href="#/tech/${id}" data-tech-card="${id}"><title>${title}</title>${body}</a>`;
   });
 
   const wTitle = (WORKS.find(x => x.id === workId) || {}).title || '';

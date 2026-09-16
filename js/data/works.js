@@ -15,7 +15,7 @@ const WORKS = [
     creator: "人类集体想象（口传 → 文献）",
     media: "神话 / 民间传说 / 史前以来的口述",
     era: "远古至今",
-    setting: "在科学尚未成形的漫长岁月里，人类用神话解释雷霆、疾病、死亡与星辰。龙、炼金、招魂、占卜并非某一本书的发明，而是跨文明反复出现的“原型”——它们是人类对力量最古老的想象，也是本卷用于标定 L1 现实基线与其余幻想的对照系。",
+    setting: "在科学尚未成形的漫长岁月里，人类用神话解释雷霆、疾病、死亡与星辰。龙、炼金、招魂、占卜并非某一本书的发明，而是跨文明反复出现的“原型”——它们是人类对力量最古老的想象，也是本卷的起点。",
     physicalDivergences: [
       "神话中的龙、不死、点石成金：皆为前科学时代对自然现象的拟人化解释，现实无对应实体或工艺。",
       "历史炼金术与占星：其符号体系真实存在（文献可考），但“贱金属变黄金”“星命决定命运”的诉求违反化学与力学。"
@@ -81,7 +81,7 @@ const WORKS = [
     era: "规则内的多元宇宙",
     setting: "D&D 不是单一故事，而是一套“魔法即资源”的规则宇宙：法师靠法术位每天施法，许愿术可向宇宙直接索要结果，异界门连通位面，魔像是注入灵魂的构装体。它把奇幻造物标准化、可计量，是现代奇幻的语法本。",
     physicalDivergences: [
-      "许愿术：以一句愿望直接重排现实因果，是 L5 的极致——不消耗能量，只消耗“规则允许”。",
+      "许愿术：以一句愿望直接重排现实因果——不消耗能量，只消耗“规则允许”。",
       "法术位：把施法量化成每日可恢复的能量槽，是游戏化公理，不对应任何生理或物理过程。"
     ],
     representativeTechs: ["spellcasting", "wish", "golem", "portal-dnd"]
@@ -207,7 +207,7 @@ const WORKS = [
     creator: "爱潜水的乌贼",
     media: "小说 / 网络文学",
     era: "蒸汽与神秘并存的伪维多利亚",
-    setting: "在一个克苏鲁味的蒸汽朋克世界里，“非凡者”沿二十二条“序列”自下而上晋升，每升一级就获得能力也逼近疯狂；封印物是被收容的危险造物，外神在星空外觊觎。设定把“升级”做成严谨的神秘学体系，L5 与 L4 频繁交界。",
+    setting: "在一个克苏鲁味的蒸汽朋克世界里，“非凡者”沿二十二条“序列”自下而上晋升，每升一级就获得能力也逼近疯狂；封印物是被收容的危险造物，外神在星空外觊觎。设定把“升级”做成严谨的神秘学体系，序列越往上，越接近不可名状。",
     physicalDivergences: [
       "序列途径：服食魔药逐级改写生命形态、获得超凡权能，是“物质即权能”的设定公理。",
       "外神/旧日：来自宇宙之外的不可名状存在，其存在本身即改写物理与认知。"
@@ -272,22 +272,24 @@ const WORKS = [
     creator: "荷马等（口传→文献）",
     media: "神话 / 史诗",
     era: "古典至希腊化",
-    setting: "奥林匹斯诸神以人格化的力量主宰雷霆、海洋与冥界，英雄在神祇的棋局中讨要命运。",
-    physicalDivergences: ["神祇肉体不死且可直 intervening 自然，违背生物规律。", "神谕以口授预言、却左右凡人国运，是言灵级权能。"],
-    representativeTechs: ["oracle-of-delphi", "olympian", "hydra", "golden-fleece"]
+    setting: "爱琴海世界的诸神住在奥林匹斯山顶：宙斯掌雷霆、波塞冬掌海洋、哈迪斯掌冥界。他们有人形的身体与人的脾气，会嫉妒、偏私、报复，也会为献祭而偏袒一方。凡人英雄多是神的后代，一生的功业与结局都写在神谕和命运三女神的线上。",
+    physicalDivergences: ["神祇肉体不死、可随意变形，并以人格意志直接支配雷霆、海洋等自然力。", "神谕与命运可预告并锁定凡人的结局，凡人无法违逆。", "神与凡人生育的后代兼具神力与必死，形成独立的英雄世代。"],
+    mythSources: ["希腊罗马神话（本身即原型）"],
+    representativeTechs: ["gm-olympian", "gm-delphi", "gm-typhon", "gm-fleece"]
   },
   {
     id: "norse-myth",
-    series: { name: "北欧神话", members: ["《埃达》", "萨迦", "瓦爾基里传说"] },
+    series: { name: "北欧神话", members: ["《埃达》（诗体埃达 / 散文埃达）", "冰岛萨迦", "瓦尔基里与英雄传说"] },
     treeLit: ["R5", "L5", "B5", "W2"],
     year: -900,
     title: "北欧神话",
     creator: "佚名（吟游口传）",
     media: "神话 / 史诗",
     era: "维京前期",
-    setting: "九界由世界树尤克特拉希尔联结，阿萨神族与霜巨人往复征战，诸神黄昏预定了终局。",
-    physicalDivergences: ["世界树贯通九界、违反拓扑。", "命运由诺恩三女神织定、不可更改。"],
-    representativeTechs: ["yggdrasil", "mjolnir", "valkyrie", "ragnarok"]
+    setting: "九界由世界树尤克特拉希尔联结，阿萨神族与霜巨人、火巨人往复征战。诸神靠伊登的青春苹果延寿，却并非全能，也非不死——他们早已知晓自己将在诸神黄昏中战死，仍照常赴约。卢恩字母、雷锤与女武神，都是这套「明知结局仍要一战」的宿命观的注脚。",
+    physicalDivergences: ["世界树贯通九界、违反常规空间拓扑，九界之间有彩虹桥与诸般路径相连。", "命运由诺恩三女神织定，诸神与凡人均不可更改，唯能选择赴约的姿态。", "符文一经刻写即生效，文字本身具备改变现实的力量。"],
+    mythSources: ["日耳曼-北欧神话（本身即原型）"],
+    representativeTechs: ["nm-yggdrasil", "nm-mjolnir", "nm-valkyrie", "nm-ragnarok"]
   },
   {
     id: "egypt-myth",
@@ -967,16 +969,17 @@ const WORKS = [
   },
   {
     id: "dresden",
-    series: { name: "德累斯顿档案", members: ["《风暴前夜》", "芝加哥巫师", "私家侦探"] },
+    series: { name: "德累斯顿档案（The Dresden Files）", members: ["长篇 17 部（2000–2020，首部 Storm Front）", "短篇集 Side Jobs / Brief Cases", "同宇宙漫画与游戏"] },
     treeLit: ["F3", "L4", "B4", "W3"],
     year: 2000,
     title: "德累斯顿档案",
-    creator: "吉姆·布彻",
+    creator: "吉姆·布彻（Jim Butcher）",
     media: "小说",
     era: "当代芝加哥",
-    setting: "唯一登入黄页的魔法师哈里·德累斯顿，在都市怪谈与地狱势力间接案。",
-    physicalDivergences: ["以杖与咒在都市施展实战魔法。", "天堂与地狱以灵魂为筹码博弈。"],
-    representativeTechs: ["staff", "soulfire", "wards", "fae"]
+    setting: "当代芝加哥的巫师哈利·德累斯顿，是电话黄页上唯一登广告的魔法师，以私家侦探的身份接办超自然委托。他与圣白议会、吸血鬼诸庭、仙灵双庭、堕天使与十字骑士周旋，在一桩桩看似普通的案件里，逐步卷入决定现实存续的战争。",
+    physicalDivergences: ["魔法是可在当代都市中实用的一门技艺，需凭器物与咒语施行，凡人可以习得。", "灵魂可被契约、储存与交易，天堂与地狱围绕它长期博弈。", "仙灵、吸血鬼、狼人与堕天使各自成体系，与人类社会暗中并存。"],
+    mythSources: ["基督教天使学", "凯尔特与日耳曼仙灵传说", "吸血鬼与狼人民间传说"],
+    representativeTechs: ["dr-staff", "dr2-seven-laws", "dr2-swords", "dr2-faerie-courts"]
   },
   {
     id: "priory",
@@ -1123,26 +1126,26 @@ const WORKS = [
   },
   {
     id: "gideon",
-    series: { name: "第九死灵 House", members: ["《基甸九柱》", "《是非之墓》", " necromancer"] },
+    series: { name: "锁墓人 / 第九宫的吉迪恩", members: ["《第九宫的吉迪恩》", "Harrow the Ninth", "Nona the Ninth", "Alecto the Ninth"] },
     treeLit: ["L4", "B4", "W1", "F5"],
     year: 2019,
-    title: "第九死灵 House",
-    creator: "Tamsyn Muir",
+    title: "第九宫的吉迪恩",
+    creator: "塔姆辛·缪尔（Tamsyn Muir）",
     media: "小说",
-    era: "星际 House",
+    era: "星际（太空歌剧）",
     setting: "亡灵祭司与她的骑士护卫在古老 House 的继承试炼里解密、互弑，血肉与棺椁即是武器。",
     physicalDivergences: ["以尸体与骨骼构筑构装战力。", "灵魂被封入剑、跨越宿主。"],
     representativeTechs: ["cavalier", "necromancer", "rapier", "coomb"]
   },
   {
     id: "scholomance",
-    series: { name: "史cholomance", members: ["《致命教育》", "《最后的毕业生》", "黑School"] },
+    series: { name: "通灵学院（The Scholomance）", members: ["《致命教育》", "《最后的毕业生》", "《金色飞地》"] },
     treeLit: ["F3", "L4", "B4", "W3"],
     year: 2020,
-    title: "史cholomance",
-    creator: "娜奥米·诺维克",
+    title: "通灵学院",
+    creator: "娜奥米·诺维克（Naomi Novik）",
     media: "小说",
-    era: "魔法寄宿校",
+    era: "魔法寄宿学校（架空）",
     setting: "一座与世隔绝的黑暗魔法学校里，学生靠组队与诡计在毕业前活下来，恶意遍地。",
     physicalDivergences: ["以mana 直接施法、无咒文。", "恶意造物自主猎杀学生。"],
     representativeTechs: ["malia", "mana", "enmity", "wand"]
@@ -1474,13 +1477,13 @@ const WORKS = [
   },
   {
     id: "ancient-magus",
-    series: { name: "魔法使的嫁入", members: ["同名漫画", "艾利亚斯", "魔法学院"] },
+    series: { name: "魔法使的新娘", members: ["漫画原作（2013 年连载）", "TV 动画（2017）", "OAD 三部曲"] },
     treeLit: ["F3", "L3", "B3", "W3"],
     year: 2013,
-    title: "魔法使的嫁入",
-    creator: "羊冢エム",
+    title: "魔法使的新娘",
+    creator: "ヤマザキコレ（Kore Yamazaki）",
     media: "漫画 / 动画",
-    era: "英格兰",
+    era: "现代英格兰乡村",
     setting: "孤独少女羽鸟智世被卖给精灵般的魔法使，在村落与学院间学习与人外的魔法。",
     physicalDivergences: ["魔法以契约与人外连结。", "龙以人形行走、掌控元素。"],
     representativeTechs: ["elias", "dragon", "silky", "college"]
@@ -1988,9 +1991,9 @@ const WORKS_META = {
   },
   "dresden": {
     story: "芝加哥唯一登广告的巫师哈利·德累斯顿，接办超自然委托，卷入巫师、吸血鬼与天使的战争。",
-    synopsis: "哈利从捉鬼小案逐步卷入白议会、冬庭与外者危机，在《 changes 》后成为冬之骑士。",
+    synopsis: "哈利从捉鬼小案逐步卷入白议会、冬庭与外者的危机，在《变》（Changes）之后成为冬之骑士。",
     background: "巴特勒以硬汉侦探小说混搭 urban fantasy，首创「巫师当私人侦探」的冷峻腔。",
-    author: "吉姆·巴特勒（1971–），美国作家，德累斯顿档案是其长销都市奇幻系列。"
+    author: "吉姆·布彻（Jim Butcher，1971– ），美国作家，德累斯顿档案是其长销都市奇幻系列。"
   },
   "priory": {
     story: "分裂的东西大陆上，女术士与女战士跨越偏见结盟，对抗即将苏醒的火之龙与瘟疫。",
@@ -2059,10 +2062,10 @@ const WORKS_META = {
     author: "N.K. 杰米辛（1972–），同作者，大都会之魂系列第一部。"
   },
   "gideon": {
-    story: "亡灵planet 上，女剑客吉迪恩与女巫继承人对撞，在锁墓修会里解谜求生。",
-    synopsis: "《第九死灵》写吉迪恩与哈罗在尸窟学院互斗互助，揭开家族与 necromancer 真相。",
-    background: "缪尔以拉丁术语、同志情谊与黑色幽默写「太空奇幻」neo-gothic。",
-    author: "塔姆辛·缪尔（1985–），新西兰作家，锁墓九部曲为其代表作。"
+    story: "在由死灵术主宰的九座冢星上，女剑客吉迪恩与女巫继承人哈罗在锁墓修会中互斗互助，一同破解尸窟学院里的谜题。",
+    synopsis: "《第九宫的吉迪恩》写吉迪恩与哈罗在尸窟般的学院里既竞争又依存，逐步揭开家族血脉与死灵术的真相。",
+    background: "缪尔糅合拉丁术语、同志情谊与黑色幽默，把死灵术写成一套带礼仪与家系的政治制度，风格被称为「太空哥特」。",
+    author: "塔姆辛·缪尔，新西兰作家，「锁墓人」系列（The Locked Tomb）为其代表作。"
   },
   "scholomance": {
     story: "与世隔绝的死亡魔法学院里，学生须熬过毕业前被怪物吞噬的命运，优等生策划破局。",

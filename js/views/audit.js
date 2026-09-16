@@ -10,20 +10,15 @@
 
 const AuditView = {
   // 单条造物完整度评分（0-100）
+  // 维度：摘要有效性 / 描述的独立性与厚度 / 是否接入造物树 / 是否打标签
   _techScore(t) {
     let s = 0;
     if (t.summary && t.summary.length >= 8) s += 10;
-    if (t.description) s += Math.min(30, t.description.length / 100 * 30);
-    const fp = (t.firstPrinciples || []).length;
-    if (fp >= 1) s += 10;
-    if (fp >= 3) s += 10;
-    if (t.implementation) {
-      if (t.implementation.current) s += 15;
-      const p = (t.implementation.path || []).length;
-      if (p >= 1) s += 7;
-      if (p >= 3) s += 8;
-    }
-    if ((t.dependencies || []).length >= 1) s += 10;
+    if (t.description) s += Math.min(25, t.description.length / 100 * 25);
+    if (t.description && t.description !== t.summary) s += 15;
+    if (t.description && t.description.length >= 60) s += 15;
+    if ((t.dependencies || []).length >= 1) s += 20;
+    if ((t.tags || []).length >= 1) s += 15;
     return Math.round(s);
   },
 
@@ -32,11 +27,9 @@ const AuditView = {
     if (score >= 78) return ["内容完整"];
     const tags = [];
     if (!t.description || t.description.length < 60) tags.push("描述偏薄");
-    const fp = (t.firstPrinciples || []).length;
-    if (fp < 2) tags.push("原理分析不足");
-    const p = (t.implementation && t.implementation.path) ? t.implementation.path.length : 0;
-    if (p < 2) tags.push("实现路径简略");
-    if ((t.dependencies || []).length < 1) tags.push("未接入概念树");
+    if (t.description && t.description === t.summary) tags.push("描述与摘要重复");
+    if ((t.dependencies || []).length < 1) tags.push("未接入造物树");
+    if ((t.tags || []).length < 1) tags.push("未打标签");
     if (!tags.length) tags.push("可小幅润色");
     return tags;
   },
@@ -166,7 +159,7 @@ const AuditView = {
 
     const techRowsHtml = techSorted.map(r => `
       <tr data-score="${r.score}">
-        <td class="aw-name"><a href="#/tech/${r.id}">${esc(r.name)}</a></td>
+        <td class="aw-name"><a href="#/tech/${r.id}" data-tech-card="${r.id}">${esc(r.name)}</a></td>
         <td>${esc(this._workTitle(r.workId))}</td>
         <td class="num">${r.score}</td>
         <td class="aw-diag">${r.diag.map(x => `<span class="aw-tag ${r.band}">${x}</span>`).join("")}</td>
@@ -179,7 +172,7 @@ const AuditView = {
     const todoHtml = todo.map(r => `
       <tr class="todo-row ${doneSet.has(r.id) ? "done" : ""}" data-id="${r.id}">
         <td class="todo-chk"><input type="checkbox" class="todo-cb" ${doneSet.has(r.id) ? "checked" : ""}></td>
-        <td class="aw-name"><a href="#/tech/${r.id}">${esc(r.name)}</a></td>
+        <td class="aw-name"><a href="#/tech/${r.id}" data-tech-card="${r.id}">${esc(r.name)}</a></td>
         <td>${esc(this._workTitle(r.workId))}</td>
         <td class="num">${r.score}</td>
         <td class="aw-diag">${r.diag.map(x => `<span class="aw-tag ${r.band}">${x}</span>`).join("")}</td>
@@ -279,7 +272,7 @@ const AuditView = {
               <tbody>${techRowsHtml}</tbody>
             </table>
           </div>
-          <p class="muted note">诊断说明：系统按字段丰富度打分——缺失描述/原理分析/实现路径/概念树依赖会被逐一标注，便于定向补写。</p>
+          <p class="muted note">诊断说明：系统按内容实质打分——描述过薄、描述与摘要重复、未接入造物树、未打标签会被逐一标注，便于定向补写。</p>
         </section>
       </section>`;
   },

@@ -25,7 +25,7 @@ const HomeView = {
     const domainChips = Object.values(DOMAINS).map(d => {
       const count = TECHS.filter(t => t.domain === d.key).length;
       return `
-        <a class="domain-chip" href="#/category?domain=${d.key}" style="--dcolor:${d.color}">
+        <a class="domain-chip" href="#/category?domains=${d.key}" style="--dcolor:${d.color}">
           <span class="d-icon">${d.icon}</span> ${d.label}
           <span class="d-count">${count}</span>
         </a>`;
