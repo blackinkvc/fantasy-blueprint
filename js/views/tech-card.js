@@ -17,11 +17,23 @@ const TechCard = {
   },
 
   open(id) {
+    // 全程防御：任何一步失败都返回 false，由调用方放行原始跳转
+    try {
+      return this._render(id);
+    } catch (err) {
+      if (typeof console !== "undefined" && console.warn) console.warn("梗概卡渲染失败，已放行跳转：", err);
+      return false;
+    }
+  },
+
+  _render(id) {
+    if (typeof TECHS === "undefined") return false;
     const t = TECHS.find(x => x.id === id);
     if (!t) return false;
 
-    const dom = DOMAINS[t.domain] || { label: t.domain, icon: "", color: "#1a1512" };
-    const work = WORKS.find(w => w.id === t.workId);
+    const dom = (typeof DOMAINS !== "undefined" && DOMAINS[t.domain]) || { label: t.domain, icon: "", color: "#1a1512" };
+    const work = (typeof WORKS !== "undefined") && WORKS.find(w => w.id === t.workId);
+    const aliases = t.aliases || [];
 
     const deps = (t.dependencies || []).map(d => {
       const x = TECHS.find(y => y.id === d);
@@ -41,7 +53,7 @@ const TechCard = {
           <div class="tc-head">
             <span class="tc-dom" style="--dcolor:${dom.color}">${dom.icon} ${esc(dom.label)}</span>
             <h3>${esc(t.name)}</h3>
-            ${t.aliases.length ? `<p class="tc-alias">别名：${esc(t.aliases.join(" / "))}</p>` : ""}
+            ${aliases.length ? `<p class="tc-alias">别名：${esc(aliases.join(" / "))}</p>` : ""}
           </div>
 
           <p class="tc-work">《${esc(work ? work.title : t.workId)}》</p>
@@ -70,25 +82,35 @@ const TechCard = {
 };
 
 // ---- 全局事件：打开 / 关闭 ----
+// 原则：只有卡片**确实弹出**时才拦截跳转。任何异常或失败一律放行，
+// 让链接按原样跳转到 #/tech/<id>，绝不让点击变成「没反应」。
 document.addEventListener("click", (e) => {
-  // 关闭优先
-  if (e.target.closest("[data-tc-close]") && TechCard.isOpen()) {
-    // 点遮罩或 × 才关；点卡片主体不关
-    const overlay = e.target.closest(".tc-overlay");
-    const insideModal = e.target.closest(".tc-modal");
-    const isX = e.target.closest(".tc-x");
-    if (isX || (overlay && !insideModal)) {
+  const el = e.target;
+  if (!el || typeof el.closest !== "function") return;
+  if (typeof TechCard === "undefined") return;
+
+  // 关闭优先：点遮罩或 ×；点卡片主体不关
+  if (TechCard.isOpen()) {
+    const overlay = el.closest(".tc-overlay");
+    const isX = el.closest(".tc-x");
+    const insideModal = el.closest(".tc-modal");
+    if (overlay && (!insideModal || isX)) {
       e.preventDefault();
       TechCard.close();
       return;
     }
   }
-  // 打开
-  const trigger = e.target.closest("[data-tech-card]");
-  if (trigger) {
-    e.preventDefault();
-    TechCard.open(trigger.getAttribute("data-tech-card"));
+
+  // 打开：失败则放行
+  const trigger = el.closest("[data-tech-card]");
+  if (!trigger) return;
+  let opened = false;
+  try {
+    opened = TechCard.open(trigger.getAttribute("data-tech-card"));
+  } catch (err) {
+    opened = false;
   }
+  if (opened) e.preventDefault();
 });
 
 document.addEventListener("keydown", (e) => {
