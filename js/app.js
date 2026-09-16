@@ -19,6 +19,7 @@ function esc(s) { return escapeHtml(s); }
   Router.register("/relations", () => RelationsView.render(), () => RelationsView.mount());
   Router.register("/audit", () => AuditView.render(), () => AuditView.mount());
   Router.register("/classify", () => ClassifyView.render());
+  Router.register("/log", () => ChangelogView.renderChangelog());
 
   document.addEventListener("DOMContentLoaded", () => Router.init());
 

@@ -345,6 +345,18 @@ body.tc-open { overflow: hidden; }
 .tc-foot { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line-soft, #ddd); text-align: right; }
 @media (max-width: 560px) { .tc-modal { padding: 22px 18px 18px; } }
 
+/* ---------- 开发日志页（#/log） ---------- */
+.log-list { display: flex; flex-direction: column; gap: 18px; max-width: 960px; }
+.log-entry { border: 1px solid var(--line); background: var(--paper); padding: 20px 22px; }
+.log-head { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; font-family: var(--font-mono); font-size: 12px; margin-bottom: 10px; }
+.log-ver { font-weight: 700; color: var(--ink); letter-spacing: .5px; }
+.log-date { color: var(--ink-dim); }
+.log-ai { color: var(--ink-dim); letter-spacing: .3px; }
+.log-title { margin: 0 0 6px; font-size: 18px; letter-spacing: 1px; }
+.log-desc { margin: 0 0 10px; font-size: 14px; line-height: 1.7; color: var(--ink-soft); }
+.log-points { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.8; color: var(--ink-soft); }
+@media (max-width: 560px) { .log-head { flex-direction: column; gap: 2px; } }
+
 /* 相关条目 */
 .chips-wrap { display: flex; flex-wrap: wrap; gap: 10px; }
 .chip-link { border: 1px solid var(--lvcolor, #000); color: var(--lvcolor, #000); font-size: 13px; padding: 4px 12px; text-decoration: none; }
