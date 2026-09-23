@@ -12518,5 +12518,145 @@ const TECHS = [
     summary: "以结、重的局。",
     description: "以结、重的局。",
     dependencies: [], tags: []
-  }
+  },
+  {
+    id: "mg-brakebills",
+    name: "布瑞克比尔斯魔法学院",
+    aliases: ["布瑞克比尔斯", "Brakebills"],
+    workId: "magicians",
+    domain: "realm",
+    summary: "一所遴选天才的魔法学院：魔法是需苦修的技术，入学即意味着不再被「幻想」安慰。",
+    description: "布瑞克比尔斯学院（Brakebills College for Magical Pedagogy）位于纽约州北部，每年从全球遴选具魔法潜质者入学。魔法在这里是可学的技艺而非天赋：学生以手势、咒语与苦修引导能量，练习中灼伤、断指是家常便饭。学院实行高压淘汰，毕业者进入魔法界；被拒者则只能走更危险的野道。",
+    dependencies: ["spellcasting", "divination-folklore"], tags: ["组织", "阶层", "仪式"]
+  },
+  {
+    id: "mg-magic-theory",
+    name: "魔法修行",
+    aliases: ["魔法理论", "施法技艺"],
+    workId: "magicians",
+    domain: "magic",
+    summary: "魔法是技艺而非天赋：以手势咒语引导能量，每次施法都伴随损耗与风险。",
+    description: "本作的核心设定：魔法不来自血脉或天赋，而是可习得的技艺。学生以身体承受能量——集中、透支、甚至灼伤断指。魔法按学派与修辞分科，可分类、可度量、可失误。这使魔法从「神奇」变成「危险的专业」，与奇幻文学常见的「天生魔法」形成有意反衬。",
+    dependencies: ["spellcasting"], tags: ["施法", "咒文", "禁忌法术"]
+  },
+  {
+    id: "mg-fillory",
+    name: "Fillory（魔法异界）",
+    aliases: ["Fillory 王国", "魔法异界"],
+    workId: "magicians",
+    domain: "realm",
+    summary: "一座如纳尼亚般宏伟却同样残忍的魔法王国，是本作的核心异界。",
+    description: "Fillory 是以欧洲神话与《纳尼亚传奇》为原型构造的魔法王国，入口藏在纽约的地下旧拱门，或用魔法钥匙开启。它表面如童话般光辉——会说话的动物、传奇的国王——内里却布满权力倾轧、背叛与「野兽」的威胁。Fillory 有自己的神、泉源与历史，是全书一切宿命的落点。",
+    dependencies: ["portal-basics", "myth-creation"], tags: ["异界", "神域", "命运"]
+  },
+  {
+    id: "mg-fillory-further",
+    name: "《Fillory与后续》",
+    aliases: ["Fillory and Further", "书中之书"],
+    workId: "magicians",
+    domain: "artifact",
+    summary: "书中书：一部写给孩子的纳尼亚式奇幻小说，也是通往异界的钥匙。",
+    description: "《Fillory and Further》是书中由「克利斯多弗·普洛夫」所写的儿童奇幻系列，讲述查特文四兄妹在魔法王国的探险，明显致敬《纳尼亚传奇》。这套书是昆汀童年的精神寄托，也是引导主角进入真实 Fillory 的线索与地图，构成全书「书中之书」的元结构。",
+    dependencies: ["myth-hero", "myth-oracle"], tags: ["圣物", "禁忌知识", "器物"]
+  },
+  {
+    id: "mg-chatwin",
+    name: "查特文兄妹",
+    aliases: ["查特文一家", "Chatwins"],
+    workId: "magicians",
+    domain: "lore",
+    summary: "《Fillory与后续》里的童书主角，真实 Fillory 最初的访客与背负罪责者。",
+    description: "查特文四兄妹（鲁伯特、海伦、马丁、菲奥娜）是《Fillory and Further》的主角。书中他们是有福的童书英雄；现实里，他们是真实 Fillory 最初的访客——马丁后来成了「野兽」，其余兄妹各以痛苦与执念进入王国的命数。全书以此模糊「童话」与「真相」的界限。",
+    dependencies: ["myth-hero", "myth-totem"], tags: ["命运", "神性血脉", "禁忌知识"]
+  },
+  {
+    id: "mg-beast",
+    name: "野兽",
+    aliases: ["the Beast", "马丁·查特文"],
+    workId: "magicians",
+    domain: "beast",
+    summary: "盘踞 Fillory、袭击学院与异界的怪物，真身是查特文家的马丁。",
+    description: "野兽（the Beast）是以黑色野兽形态出没的怪物：它在 Fillory 与人间猎杀魔法师，也能侵入布瑞克比尔斯学院。其真身为查特文家的马丁——他早年在真实 Fillory 中受创，被某股力量改造成扭曲的怪物。它的覆灭是主线阶段的重要目标。",
+    dependencies: ["dragon-myth", "myth-shapeshift"], tags: ["异兽", "亡灵", "命运"]
+  },
+  {
+    id: "mg-neitherlands",
+    name: "两界之间",
+    aliases: ["Neitherlands", "无有之地"],
+    workId: "magicians",
+    domain: "realm",
+    summary: "连接 Fillory 与人间的中转之地：一座以喷泉连通无数世界的水城。",
+    description: "两界之间（the Neitherlands）是 Fillory 与人间的过渡维度：巨大的广场上林立着通往无数世界的喷泉，跳入其中即抵达对应世界。它既是魔法世界的交通枢纽，也常被神明与势力用于监视与统治，是全书地理的核心节点。",
+    dependencies: ["portal-basics", "myth-underworld"], tags: ["异界", "传送门", "航行"]
+  },
+  {
+    id: "mg-wellspring",
+    name: "魔法泉源",
+    aliases: ["Wellspring", "魔力之源"],
+    workId: "magicians",
+    domain: "alchemy",
+    summary: "Fillory 的魔力之源：一口灌注整个魔法世界能量的神泉。",
+    description: "泉源（the Wellspring）是 Fillory 全部魔法的源头，位于王宫地下：一口喷涌金色能量的神泉。它的力量维系王国与两界之间的平衡；污染、枯竭或过度索取它，都会令 Fillory 乃至整个魔法世界失衡。重启与守护泉源构成多部书的主线。",
+    dependencies: ["transmutation", "philosopher-stone"], tags: ["转化", "能量", "神域"]
+  },
+  {
+    id: "mg-golden-keys",
+    name: "金色钥匙",
+    aliases: ["七钥匙", "Golden Keys"],
+    workId: "magicians",
+    domain: "artifact",
+    summary: "七把打开魔法世界真相与王权的钥匙，散布各处须逐一寻回。",
+    description: "金色钥匙共七把，是开启 Fillory 深处、掌控世界命脉的关键物，须按七种对应的方位与试炼逐一寻回。每把钥匙都对应一段魔法史与考验，集齐是重启泉源、登临王位的必经之路，也是本作「远征收集」母题的核心道具。",
+    dependencies: ["myth-divineweapon", "portal-basics"], tags: ["神器", "器物", "圣物"]
+  },
+  {
+    id: "mg-hedgewitch",
+    name: "野道术士",
+    aliases: ["wild witch", "野巫师"],
+    workId: "magicians",
+    domain: "magic",
+    summary: "未被学院录取者另辟的野道魔法：更危险、更便宜，也更容易失控。",
+    description: "野道（hedge witch）指未被布瑞克比尔斯等正规学院录取、转而自学魔法的人。他们的魔法靠偷学、交易与拼凑，体系危险、易出事故，也要付出更高代价。主角之一朱莉娅正是野道魔法师——在正规体系之外，用更狠的手段换取力量。",
+    dependencies: ["spellcasting", "soul-storage"], tags: ["禁忌法术", "施法", "契约"]
+  },
+  {
+    id: "mg-clockbarrens",
+    name: "钟表荒原",
+    aliases: ["Clockbarrens", "时间停滞之地"],
+    workId: "magicians",
+    domain: "realm",
+    summary: "Fillory 边缘被时间抛弃的荒原：一切停滞，唯有钟表作响。",
+    description: "钟表荒原（the Clockbarrens）是 Fillory 边缘一处被时间诅咒的荒原：这里的时间近乎停滞，满地是停摆的钟表与冻结的景象。踏入者须忍受缓慢得近乎永恒的过程，是主角寻找金钥匙、穿越时间的必经险地，也承载「时间」在本作中的代价母题。",
+    dependencies: ["myth-underworld", "scrying"], tags: ["界域", "时间", "结界"]
+  },
+  {
+    id: "mg-whitedeer",
+    name: "白鹿",
+    aliases: ["White Deer", "白色牡鹿"],
+    workId: "magicians",
+    domain: "beast",
+    summary: "Fillory 的神话向导：一只引路入王国的白鹿。",
+    description: "白鹿（the White Deer）是 Fillory 的传说：它出没于两界交接处，能指引迷路的访客深入魔法王国。它在查特文兄妹的故事里已出现，是「进入异界」的经典向导母题（呼应纳尼亚的白鹿）。白鹿既是最初的引路人，也牵引着贯穿全书的宿命线索。",
+    dependencies: ["myth-shapeshift", "myth-creation"], tags: ["异兽", "图腾", "命运"]
+  },
+  {
+    id: "mg-julia",
+    name: "朱莉娅·维克（门外修行者）",
+    aliases: ["Julia", "朱莉娅"],
+    workId: "magicians",
+    domain: "lore",
+    summary: "落选布瑞克比尔斯的朱莉娅，在正规魔法体系之外用野道与献祭换取力量。",
+    description: "朱莉娅·维克是昆汀的高中挚友，因未被布瑞克比尔斯录取而被隔绝在正规魔法之外。她转向野道魔法，以反复的失败、交易乃至献祭换取力量，也成为能直面神明的魔法师。她的故事是「被体系拒之门外者如何自我成全」的支线，电视剧将其大幅展开。",
+    dependencies: ["spellcasting", "soul-storage"], tags: ["契约", "禁忌法术", "命运"]
+  },
+  {
+    id: "mg-traveler",
+    name: "旅者",
+    aliases: ["Traveler", "跨维者"],
+    workId: "magicians",
+    domain: "magic",
+    summary: "能以灵魂穿越维度、不靠肉身行走的魔法师类别。",
+    description: "旅者（Traveler）是魔法师中极罕见的一类：他们能以灵魂形态在维度间穿梭，无须肉身或门径，是天然的「跨界者」。剧中彭尼（Penny）即一名旅者，其能力在两界之间、冥界与灵魂战线中至关重要。旅者是本作对跨维传送设定的细化。",
+    dependencies: ["portal-basics", "scrying"], tags: ["传送门", "灵魂", "异界"]
+  },
 ];

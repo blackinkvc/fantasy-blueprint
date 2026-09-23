@@ -59,5 +59,16 @@ const SERIES_BOOKS = {
     { id: "dresden-17", cn: "", en: "Battle Ground", year: 2020,
       story: "泰坦 Ethniu 率巨人与外者大军进攻芝加哥，哈利与诸方势力在废墟中迎来决战。",
       synopsis: "系列至今规模最大的一战，芝加哥的城市面貌与哈利的处境都在此后彻底改变。" }
+  ],
+  magicians: [
+    { id: "mg-book1", cn: "魔法师", en: "The Magicians", year: 2009,
+      story: "高中生昆汀被布瑞克比尔斯魔法学院录取，却发现在真实的世界里，魔法并不能治愈他的虚无；他与同学在人间与 Fillory 之间，追踪「野兽」。",
+      synopsis: "第一部确立「魔法是技艺而非天赋」的设定，并在结尾把主角引向 Fillory，为第二部远征铺路。大陆版译名与书名一致，即《魔法师》。" },
+    { id: "mg-book2", cn: "", en: "The Magician King", year: 2011,
+      story: "昆汀已登 Fillory 王位，却在一次远征中发现魔法泉源与两界之间隐藏的代价；被逐回人间的旅程揭示王权之下的真面目。",
+      synopsis: "第二部把叙事收窄到「王者远征」，补全了 Fillory 的政治与神系设定，也加深了「代价」主题。" },
+    { id: "mg-book3", cn: "", en: "The Magician's Land", year: 2014,
+      story: "被逐出 Fillory 的昆汀在人间建立新魔法工坊，却在魔法世界濒临崩塌时发现世界与「书中之书」的最终秘密，走向结局。",
+      synopsis: "终结篇把三线汇合：昆汀的自我救赎、Fillory 的存亡与魔法世界法则的真相，宣告三部曲完成完整闭环。" }
   ]
 };

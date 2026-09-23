@@ -197,5 +197,6 @@ const WORKS_TAGS = {
   "hellboy": ["bg-earth","era-modern","myth-heavy","src-comic","rg-americas","sg-dark","tn-grim"],
   "sandman": ["bg-multi","era-modern","myth-heavy","src-comic","rg-europe","sg-epic"],
   "fables": ["bg-earth","era-modern","myth-heavy","src-comic","rg-americas","sg-urban","tn-whimsy"],
-  "bone": ["bg-other","era-medieval","myth-low","src-comic","rg-americas","sg-fairytale","tn-cozy"]
+  "bone": ["bg-other","era-medieval","myth-low","src-comic","rg-americas","sg-fairytale","tn-cozy"],
+  "magicians": ["bg-earth", "era-modern", "myth-mid", "src-lit", "rg-americas", "sg-urban", "sg-dark", "tn-grim"]
 };
